@@ -33,7 +33,6 @@ namespace MvcWebUI
             services.AddSingleton<ICategoryService, CategoryManager>();
             services.AddSingleton<ICategoryDal, EfCategoryDal>();
 
-
             services.AddControllersWithViews();
         }
 
