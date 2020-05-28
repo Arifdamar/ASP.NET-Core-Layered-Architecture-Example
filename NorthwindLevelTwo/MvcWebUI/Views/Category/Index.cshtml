@@ -1,0 +1,16 @@
+﻿@model MvcWebUI.Models.CategoryListViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Category List</h2>
+
+<ul class="list-group">
+    @foreach (var category in Model.Categories)
+    {
+        <li class="list-group-item">
+            @category.CategoryId   @category.CategoryName
+        </li>
+    }
+</ul>

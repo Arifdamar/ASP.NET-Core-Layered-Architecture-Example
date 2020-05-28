@@ -5,7 +5,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    partial interface IProductService
+    public interface IProductService
     {
         List<Product> GetAll();
         List<Product> GetByCategory(int categoryId);
