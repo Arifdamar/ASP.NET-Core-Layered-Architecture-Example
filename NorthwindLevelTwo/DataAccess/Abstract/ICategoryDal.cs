@@ -6,12 +6,8 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface IProductDal : IEntityRepository<Product>
+    interface ICategoryDal : IEntityRepository<Category>
     {
-        // Repository pattern
-        // Listing
-        // Adding
-        // Deleting
-        // Updating
+
     }
 }
