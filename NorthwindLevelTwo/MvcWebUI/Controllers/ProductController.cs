@@ -8,7 +8,7 @@ using MvcWebUI.Models;
 
 namespace MvcWebUI.Controllers
 {
-    public class ProductController: Controller
+    public class ProductController : Controller
     {
         private IProductService _productService;
 
@@ -17,11 +17,12 @@ namespace MvcWebUI.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int category)
         {
             var model = new ProductListViewModel()
             {
-                Products = _productService.GetAll()
+                Products = category > 0 ? _productService.GetByCategory(category) :
+                                          _productService.GetAll()
             };
             return View(model);
         }
