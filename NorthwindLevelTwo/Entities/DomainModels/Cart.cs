@@ -14,9 +14,5 @@ namespace Entities.DomainModels
         }
         public List<CartLine> CartLines { get; set; }
 
-        public decimal Total
-        {
-            get { return CartLines.Sum(line => line.Quantity * line.Product.UnitPrice); }
-        }
     }
 }

@@ -37,7 +37,7 @@ namespace MvcWebUI.Helpers
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _httpContextAccessor.HttpContext.Session.Clear();
         }
     }
 }
