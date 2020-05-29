@@ -7,6 +7,7 @@ using Entities.Concrete;
 using Entities.DomainModels;
 using Microsoft.AspNetCore.Mvc;
 using MvcWebUI.Helpers;
+using MvcWebUI.Models;
 
 namespace MvcWebUI.Controllers
 {
@@ -44,7 +45,17 @@ namespace MvcWebUI.Controllers
 
             _cartSessionHelper.SetCart("Cart", cart);
 
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index", "Cart");
+        }
+
+        public IActionResult Index()
+        {
+            var model = new CartListViewModel()
+            {
+                Cart = _cartSessionHelper.GetCart("Cart")
+            };
+
+            return View(model);
         }
     }
 }
