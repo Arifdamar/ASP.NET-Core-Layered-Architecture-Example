@@ -61,5 +61,24 @@ namespace MvcWebUI.Controllers
 
             return View(model);
         }
+
+        public IActionResult Complete()
+        {
+            var model = new ShippingDetailsViewModel()
+            {
+                ShippingDetail = new ShippingDetail()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Complete(ShippingDetail shippingDetail)
+        {
+            TempData.Add("message", "Your order has completed successfully!");
+            _cartSessionHelper.Clear();
+
+            return RedirectToAction("Index", "Cart");
+        }
     }
 }

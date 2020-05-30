@@ -3,26 +3,31 @@
     Layout = "_Layout";
 }
 
-<h2>Product List</h2>
-<table class="table table-responsive">
-    <tr>
-        <td>Id</td>
-        <td>Name</td>
-        <td>Quantity Per Unit</td>
-        <td>Unit Price</td>
-        <td>Units In Stock</td>
-    </tr>
-    @foreach (var product in Model.Products)
-    {
+<div class="col-md-3">
+    @await Component.InvokeAsync("CategoryList")
+</div>
+<div class="col-md-9">
+    <h2>Product List</h2>
+    <table class="table table-responsive">
         <tr>
-            <td>@product.ProductId</td>
-            <td>@product.ProductName</td>
-            <td>@product.QuantityPerUnit</td>
-            <td>@product.UnitPrice</td>
-            <td>@product.UnitsInStock</td>
-            <td>
-                <a class="btn btn-success btn-sm" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId">Add To Cart</a>
-            </td>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Quantity Per Unit</td>
+            <td>Unit Price</td>
+            <td>Units In Stock</td>
         </tr>
-    }
-</table>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.QuantityPerUnit</td>
+                <td>@product.UnitPrice</td>
+                <td>@product.UnitsInStock</td>
+                <td>
+                    <a class="btn btn-success btn-sm" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId">Add To Cart</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

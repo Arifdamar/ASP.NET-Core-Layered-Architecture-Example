@@ -4,22 +4,23 @@
     Layout = "_Layout";
 }
 
-<h2>Cart</h2>
 
-@if (Model.Cart.CartLines.Count != 0)
-{
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Quantity Per Unit</th>
-                <th>Unit Price</th>
-                <th>Units In Stock</th>
-                <th>Cart Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="col-md-12">
+    <h2>Cart</h2>
+    @if (Model.Cart.CartLines.Count != 0)
+    {
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Quantity Per Unit</th>
+                    <th>Unit Price</th>
+                    <th>Units In Stock</th>
+                    <th>Cart Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
             @foreach (var cartLine in Model.Cart.CartLines)
             {
                 <tr>
@@ -34,14 +35,22 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <div class="container text-center">
-        <h5>Wow Such Empty!</h5>
-        <a class="btn btn-primary" asp-controller="Product" asp-action="Index">Go Shopping!</a>
-    </div>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>
+                    <a asp-controller="Cart" asp-action="Complete" class="btn btn-primary">Complete Order</a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    }
+    else
+    {
+        <div class="container text-center">
+            <h5>Wow Such Empty!</h5>
+            <a class="btn btn-primary" asp-controller="Product" asp-action="Index">Go Shopping!</a>
+        </div>
     }
 
+</div>
