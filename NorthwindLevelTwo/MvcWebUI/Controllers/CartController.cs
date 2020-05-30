@@ -75,6 +75,10 @@ namespace MvcWebUI.Controllers
         [HttpPost]
         public IActionResult Complete(ShippingDetail shippingDetail)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             TempData.Add("message", "Your order has completed successfully!");
             _cartSessionHelper.Clear();
 

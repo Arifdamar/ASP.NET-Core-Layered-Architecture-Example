@@ -7,26 +7,32 @@
         <div class="form-group">
             <label asp-for="ShippingDetail.FirstName">First Name</label>
             <input asp-for="ShippingDetail.FirstName" type="text" class="form-control" placeholder="First Name" />
+            <span asp-validation-for="ShippingDetail.FirstName"></span>
         </div>
         <div class="form-group">
             <label asp-for="ShippingDetail.LastName">Last Name</label>
             <input asp-for="ShippingDetail.LastName" type="text" class="form-control" placeholder="Last Name" />
+            <span asp-validation-for="ShippingDetail.LastName"></span>
         </div>
         <div class="form-group">
             <label asp-for="ShippingDetail.City">City</label>
             <input asp-for="ShippingDetail.City" type="text" class="form-control" placeholder="City" />
+            <span asp-validation-for="ShippingDetail.City"></span>
         </div>
         <div class="form-group">
             <label asp-for="ShippingDetail.Address">Address</label>
             <input asp-for="ShippingDetail.Address" type="text" class="form-control" placeholder="Address" />
+            <span asp-validation-for="ShippingDetail.Address"></span>
         </div>
         <div class="form-group">
             <label asp-for="ShippingDetail.Email">Email</label>
             <input asp-for="ShippingDetail.Email" type="text" class="form-control" placeholder="Email" />
+            <span asp-validation-for="ShippingDetail.Email"></span>
         </div>
         <div class="form-group">
             <label asp-for="ShippingDetail.Age">Age</label>
             <input asp-for="ShippingDetail.Age" type="text" class="form-control" placeholder="Age" />
+            <span asp-validation-for="ShippingDetail.Age"></span>
         </div>
         <input type="submit" value="Save" class="btn btn-success" />
     </form>
