@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Arif.ToDo.Entities\Arif.ToDo.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Concrete\EntityFrameworkCore\Contexts\" />
+  </ItemGroup>
+
 </Project>
