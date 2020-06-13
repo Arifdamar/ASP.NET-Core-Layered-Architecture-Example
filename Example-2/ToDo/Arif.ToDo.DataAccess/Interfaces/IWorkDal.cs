@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.DataAccess.Interfaces
 {
     public interface IWorkDal
     {
-        void SaveWork(Work work);
-        void DeleteWork(Work work);
-        void UpdateWork(Work work);
-        Work GetWorkById(int id);
-        List<Work> GetAllWorks();
+        void Save(Work table);
+        void Delete(Work table);
+        void Update(Work table);
+        Work GetById(int id);
+        List<Work> GetAll();
     }
 }

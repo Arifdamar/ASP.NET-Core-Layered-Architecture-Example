@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Arif.ToDo.Entities.Interfaces;
 
 namespace Arif.ToDo.Entities.Concrete

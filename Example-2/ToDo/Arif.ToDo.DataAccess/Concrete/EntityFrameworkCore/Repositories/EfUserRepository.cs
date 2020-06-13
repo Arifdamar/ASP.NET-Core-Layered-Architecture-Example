@@ -5,29 +5,29 @@ using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
-    public class EfWorkRepository : IWorkDal
+    public class EfUserRepository : IUserDal
     {
-        public void Save(Work table)
+        public void Save(User table)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Work table)
+        public void Delete(User table)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Work table)
+        public void Update(User table)
         {
             throw new NotImplementedException();
         }
 
-        public Work GetById(int id)
+        public User GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Work> GetAll()
+        public List<User> GetAll()
         {
             throw new NotImplementedException();
         }
