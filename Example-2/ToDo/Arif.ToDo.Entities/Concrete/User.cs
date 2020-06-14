@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Arif.ToDo.Entities.Interfaces;
 
 namespace Arif.ToDo.Entities.Concrete
