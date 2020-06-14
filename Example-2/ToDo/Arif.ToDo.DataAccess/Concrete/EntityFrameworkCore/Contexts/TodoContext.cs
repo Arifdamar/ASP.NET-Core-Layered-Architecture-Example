@@ -13,6 +13,11 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Contexts
             optionsBuilder.UseSqlServer(@"server=(localdb)\ProjectsV13;database=ToDo;integrated security=true;");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Work> Works { get; set; }
     }
