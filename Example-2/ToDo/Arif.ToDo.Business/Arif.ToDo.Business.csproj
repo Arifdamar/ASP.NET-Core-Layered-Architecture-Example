@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Arif.ToDo.DataAccess\Arif.ToDo.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
 </Project>
