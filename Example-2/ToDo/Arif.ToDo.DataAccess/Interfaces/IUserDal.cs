@@ -3,12 +3,8 @@ using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.DataAccess.Interfaces
 {
-    public interface IUserDal
+    public interface IUserDal : IGenericDal<User>
     {
-        void Save(User table);
-        void Delete(User table);
-        void Update(User table);
-        User GetById(int id);
-        List<User> GetAll();
+
     }
 }
