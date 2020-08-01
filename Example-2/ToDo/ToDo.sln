@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arif.ToDo.DataAccess", "Arif.ToDo.DataAccess\Arif.ToDo.DataAccess.csproj", "{8671DD12-63B5-491C-A9B7-C14013D283D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arif.ToDo.DataAccess", "Arif.ToDo.DataAccess\Arif.ToDo.DataAccess.csproj", "{8671DD12-63B5-491C-A9B7-C14013D283D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arif.ToDo.Business", "Arif.ToDo.Business\Arif.ToDo.Business.csproj", "{A1DBA0E0-B59F-426F-A53B-52C7A9EBF714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arif.ToDo.Business", "Arif.ToDo.Business\Arif.ToDo.Business.csproj", "{A1DBA0E0-B59F-426F-A53B-52C7A9EBF714}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arif.ToDo.Entities", "Arif.ToDo.Entities\Arif.ToDo.Entities.csproj", "{D6E777CB-9EF6-46AF-A78B-9710D5565007}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arif.ToDo.Web", "Arif.ToDo.Web\Arif.ToDo.Web.csproj", "{F12FA444-EFBE-4711-871C-9F79FDA81126}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arif.ToDo.Entities", "Arif.ToDo.Entities\Arif.ToDo.Entities.csproj", "{D6E777CB-9EF6-46AF-A78B-9710D5565007}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{D6E777CB-9EF6-46AF-A78B-9710D5565007}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6E777CB-9EF6-46AF-A78B-9710D5565007}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6E777CB-9EF6-46AF-A78B-9710D5565007}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F12FA444-EFBE-4711-871C-9F79FDA81126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F12FA444-EFBE-4711-871C-9F79FDA81126}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F12FA444-EFBE-4711-871C-9F79FDA81126}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F12FA444-EFBE-4711-871C-9F79FDA81126}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

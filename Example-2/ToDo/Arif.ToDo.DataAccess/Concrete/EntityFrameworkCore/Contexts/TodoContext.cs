@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 using Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Mapping;
 using Arif.ToDo.Entities.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Contexts
 {
-    public class TodoContext : DbContext
+    public class TodoContext : IdentityDbContext<AppUser, AppRole, int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"server=(localdb)\ProjectsV13;database=ToDo;integrated security=true;");
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserMap());
-            modelBuilder.ApplyConfiguration(new WorkMap());
+            modelBuilder.ApplyConfiguration(new TaskMap());
+            base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Work> Works { get; set; }
+        public DbSet<Task> Tasks { get; set; }
     }
 }

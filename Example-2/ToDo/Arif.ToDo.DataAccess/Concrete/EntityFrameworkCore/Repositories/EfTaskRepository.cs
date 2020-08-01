@@ -7,7 +7,7 @@ using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
-    public class EfWorkRepository : EfGenericRepository<Work>, IWorkDal
+    public class EfTaskRepository : EfGenericRepository<Task>, ITaskDal
     {
 
     }

@@ -5,7 +5,7 @@ using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.Business.Interfaces
 {
-    public interface IUserService : IGenericService<User>
+    public interface ITaskService : IGenericService<Task>
     {
 
     }

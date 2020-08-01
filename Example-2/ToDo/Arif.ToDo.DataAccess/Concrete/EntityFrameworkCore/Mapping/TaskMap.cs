@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Mapping
 {
-    public class WorkMap : IEntityTypeConfiguration<Work>
+    public class TaskMap : IEntityTypeConfiguration<Task>
     {
-        public void Configure(EntityTypeBuilder<Work> builder)
+        public void Configure(EntityTypeBuilder<Task> builder)
         {
             builder.HasKey(I => I.Id);
             builder.Property(I => I.Id).UseIdentityColumn();
