@@ -23,5 +23,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Contexts
         }
 
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<Urgency> Urgencies { get; set; }
+
     }
 }

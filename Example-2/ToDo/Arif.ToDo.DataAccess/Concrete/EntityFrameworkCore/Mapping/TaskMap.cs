@@ -13,10 +13,12 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Mapping
         {
             builder.HasKey(I => I.Id);
             builder.Property(I => I.Id).UseIdentityColumn();
-
             builder.Property(I => I.Name).HasMaxLength(150);
-
             builder.Property(I => I.Description).HasColumnType("ntext");
+
+            builder.HasOne(I => I.Urgency)
+                .WithMany(I => I.Tasks)
+                .HasForeignKey(I => I.UrgencyId);
         }
     }
 }

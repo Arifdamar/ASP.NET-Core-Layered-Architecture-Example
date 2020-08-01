@@ -12,6 +12,10 @@ namespace Arif.ToDo.Entities.Concrete
         public string Description { get; set; }
         public bool Status { get; set; }
         public DateTime CratedDate { get; set; }
+
+        public int UrgencyId { get; set; }
+        public Urgency Urgency { get; set; }
+
         public int? AppUserId { get; set; }
         public AppUser AppUser { get; set; }
     }
