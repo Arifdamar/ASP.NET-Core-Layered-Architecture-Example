@@ -19,11 +19,15 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TaskMap());
+            modelBuilder.ApplyConfiguration(new ReportMap());
+            modelBuilder.ApplyConfiguration(new AppUserMap());
+            modelBuilder.ApplyConfiguration(new UrgencyMap());
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Urgency> Urgencies { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
     }
 }
