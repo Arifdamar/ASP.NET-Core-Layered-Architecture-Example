@@ -9,35 +9,36 @@ namespace Arif.ToDo.Business.Concrete
 {
     public class TaskManager : ITaskService
     {
-        private readonly EfTaskRepository efWorkRepository;
+        private readonly EfTaskRepository _workRepository;
 
         public TaskManager()
         {
-            efWorkRepository = new EfTaskRepository();
+            // TODO refactor
+            _workRepository = new EfTaskRepository();
         }
         public void Save(Task table)
         {
-            efWorkRepository.Save(table);
+            _workRepository.Save(table);
         }
 
         public void Delete(Task table)
         {
-            efWorkRepository.Delete(table);
+            _workRepository.Delete(table);
         }
 
         public void Update(Task table)
         {
-            efWorkRepository.Update(table);
+            _workRepository.Update(table);
         }
 
         public Task GetById(int id)
         {
-            return efWorkRepository.GetById(id);
+            return _workRepository.GetById(id);
         }
 
         public List<Task> GetAll()
         {
-            return efWorkRepository.GetAll();
+            return _workRepository.GetAll();
         }
     }
 }
