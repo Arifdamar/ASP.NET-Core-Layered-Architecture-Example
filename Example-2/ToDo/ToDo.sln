@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arif.ToDo.Business", "Arif.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arif.ToDo.Entities", "Arif.ToDo.Entities\Arif.ToDo.Entities.csproj", "{D6E777CB-9EF6-46AF-A78B-9710D5565007}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arif.ToDo.Web", "Arif.ToDo.Web\Arif.ToDo.Web.csproj", "{75A7C20C-7890-44F1-99A1-B84357F02772}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D6E777CB-9EF6-46AF-A78B-9710D5565007}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6E777CB-9EF6-46AF-A78B-9710D5565007}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6E777CB-9EF6-46AF-A78B-9710D5565007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A7C20C-7890-44F1-99A1-B84357F02772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A7C20C-7890-44F1-99A1-B84357F02772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A7C20C-7890-44F1-99A1-B84357F02772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A7C20C-7890-44F1-99A1-B84357F02772}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

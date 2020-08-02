@@ -28,13 +28,11 @@ namespace Arif.ToDo.Web
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}"
-                );
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
