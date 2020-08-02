@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories;
+using Arif.ToDo.DataAccess.Interfaces;
 using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.Business.Concrete
 {
     public class ReportManager : IReportService
     {
-        private readonly EfReportRepository _reportRepository;
+        private readonly IReportDal _reportRepository;
 
-        public ReportManager()
+        public ReportManager(IReportDal reportRepository)
         {
-            // TODO refactor
-            _reportRepository = new EfReportRepository();
+            _reportRepository = reportRepository;
         }
 
         public void Save(Report table)

@@ -10,12 +10,11 @@ namespace Arif.ToDo.Business.Concrete
 {
     public class UrgencyManager : IUrgencyService
     {
-        private readonly EfUrgencyRepository _urgencyRepository;
+        private readonly IUrgencyDal _urgencyRepository;
 
-        public UrgencyManager()
+        public UrgencyManager(IUrgencyDal urgencyRepository)
         {
-            // TODO refactor
-            _urgencyRepository = new EfUrgencyRepository();
+            _urgencyRepository = urgencyRepository;
         }
 
         public void Save(Urgency table)
