@@ -24,7 +24,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             TempData["Active"] = "task";
-            var tasks = _taskService.GetAll();
+            var tasks = _taskService.GetUndoneTasksWithUrgency();
             List<TaskListViewModel> viewModel = new List<TaskListViewModel>();
 
             tasks.ForEach(task =>

@@ -1,4 +1,5 @@
-﻿@model List<TaskListViewModel>
+﻿@using System.Globalization
+@model List<TaskListViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -13,8 +14,8 @@
             <tr>
                 <th>Ad</th>
                 <th>Açıklama</th>
-                <th>Durum</th>
-                <th>Aciliyet Id</th>
+                <th>Oluşturulma Tarihi</th>
+                <th>Aciliyet Durum</th>
                 <th>İşlem</th>
             </tr>
         </thead>
@@ -30,10 +31,10 @@
                     @item.Description
                 </td>
                 <td>
-                    @item.Status
+                    @item.CratedDate.ToString(CultureInfo.CurrentCulture)
                 </td>
                 <td>
-                    @item.UrgencyId
+                    @item.Urgency.Description
                 </td>
                 <td>
                     <a asp-action="UpdateTask" asp-controller="Task" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Güncelle</a>
@@ -48,7 +49,7 @@ else
 {
     <div class="text-center mt-4">
         <p class="lead">
-            No tasks found
+            Hiç Görev Bulunamadı
         </p>
 
         <a asp-controller="Task" asp-action="AddTask" class="btn btn-info btn-sm my-2">Add New Task</a>

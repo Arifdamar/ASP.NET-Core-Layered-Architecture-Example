@@ -7,6 +7,6 @@ namespace Arif.ToDo.Business.Interfaces
 {
     public interface ITaskService : IGenericService<Task>
     {
-
+        List<Task> GetUndoneTasksWithUrgency();
     }
 }
