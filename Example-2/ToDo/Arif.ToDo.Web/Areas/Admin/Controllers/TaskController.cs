@@ -49,11 +49,11 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             TempData["Active"] = "task";
             ViewBag.Urgencies = new SelectList(_urgencyService.GetAll(), "Id", "Description");
 
-            return View(new TaskAddViewModel());
+            return View(new AddTaskViewModel());
         }
 
         [HttpPost]
-        public IActionResult AddTask(TaskAddViewModel model)
+        public IActionResult AddTask(AddTaskViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +68,40 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             }
 
             ViewBag.Urgencies = new SelectList(_urgencyService.GetAll(), "Id", "Description");
+
+            return View(model);
+        }
+
+        public IActionResult UpdateTask(int id)
+        {
+            TempData["Active"] = "task";
+            var task = _taskService.GetById(id);
+            ViewBag.Urgencies = new SelectList(_urgencyService.GetAll(), "Id", "Description", task.UrgencyId);
+
+            return View(new UpdateTaskViewModel()
+            {
+                Id = task.Id,
+                Name = task.Name,
+                Description = task.Description,
+                UrgencyId = task.UrgencyId
+            });
+        }
+
+        [HttpPost]
+        public IActionResult UpdateTask(UpdateTaskViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _taskService.Update(new Task()
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    UrgencyId = model.UrgencyId
+                });
+
+                return RedirectToAction("Index");
+            }
 
             return View(model);
         }

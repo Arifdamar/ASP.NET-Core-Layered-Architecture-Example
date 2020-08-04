@@ -7,8 +7,9 @@ using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.Web.Areas.Admin.Models
 {
-    public class TaskAddViewModel
+    public class UpdateTaskViewModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "Ad alanı gereklidir")]
         public string Name { get; set; }
         public string Description { get; set; }
