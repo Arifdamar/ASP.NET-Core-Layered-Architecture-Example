@@ -35,5 +35,23 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
             return View(viewModel);
         }
+
+        public IActionResult AddUrgency()
+        {
+            return View(new AddUrgencyViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult AddUrgency(AddUrgencyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _urgencyService.Save(new Urgency(){Description = model.Description});
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
     }
 }
