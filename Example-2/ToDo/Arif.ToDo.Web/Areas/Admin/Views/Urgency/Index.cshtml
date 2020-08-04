@@ -1,0 +1,35 @@
+﻿@model List<UrgencyListViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <a asp-action="AddUrgency" asp-controller="Home" class="btn btn-info btn-sm my-2">Add New Urgency</a>
+
+@if (Model.Count != 0)
+{
+    <table class="table table-sm table-hover">
+        <thead>
+        <tr>
+            <th>Description</th>
+        </tr>
+        </thead>
+    
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Definition
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="text-center lead mt-4">
+        No urgencies found
+    </div>
+}
