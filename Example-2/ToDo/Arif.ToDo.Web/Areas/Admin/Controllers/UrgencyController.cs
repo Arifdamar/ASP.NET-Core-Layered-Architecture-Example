@@ -47,6 +47,34 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _urgencyService.Save(new Urgency(){Description = model.Description});
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult UpdateUrgency(int id)
+        {
+            var urgency = _urgencyService.GetById(id);
+            UpdateUrgencyViewModel model = new UpdateUrgencyViewModel()
+            {
+                Id = urgency.Id,
+                Description = urgency.Description
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUrgency(UpdateUrgencyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _urgencyService.Update(new Urgency()
+                {
+                    Id = model.Id,
+                    Description = model.Description
+                });
 
                 return RedirectToAction("Index");
             }
