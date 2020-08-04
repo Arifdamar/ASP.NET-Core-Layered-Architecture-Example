@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Arif.ToDo.Web.Areas.Admin.Controllers
 {
@@ -12,10 +13,12 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
     public class TaskController : Controller
     {
         private readonly ITaskService _taskService;
+        private readonly IUrgencyService _urgencyService;
 
-        public TaskController(ITaskService taskService)
+        public TaskController(ITaskService taskService, IUrgencyService urgencyService)
         {
             _taskService = taskService;
+            _urgencyService = urgencyService;
         }
 
         public IActionResult Index()
@@ -39,6 +42,34 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             });
 
             return View(viewModel);
+        }
+
+        public IActionResult AddTask()
+        {
+            TempData["Active"] = "task";
+            ViewBag.Urgencies = new SelectList(_urgencyService.GetAll(), "Id", "Description");
+
+            return View(new TaskAddViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult AddTask(TaskAddViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _taskService.Save(new Task()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    UrgencyId = model.UrgencyId
+                });
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Urgencies = new SelectList(_urgencyService.GetAll(), "Id", "Description");
+
+            return View(model);
         }
     }
 }

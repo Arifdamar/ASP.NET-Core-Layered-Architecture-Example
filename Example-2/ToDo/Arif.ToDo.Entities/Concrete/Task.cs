@@ -12,7 +12,7 @@ namespace Arif.ToDo.Entities.Concrete
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }
-        public DateTime CratedDate { get; set; }
+        public DateTime CratedDate { get; set; } = DateTime.Now;
 
         public int UrgencyId { get; set; }
         public Urgency Urgency { get; set; }
