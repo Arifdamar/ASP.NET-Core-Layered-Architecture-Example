@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string activePage = TempData["Active"]?.ToString();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -26,8 +30,8 @@
         <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Admin Layout</div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action">Görev İşlemleri</a>
-                <a asp-controller="Urgency" asp-action="Index" class="list-group-item list-group-item-action">Aciliyet İşlemleri</a>
+                <a asp-controller="Task" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "task" ? "active" : "")">Görev İşlemleri</a>
+                <a asp-controller="Urgency" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "urgency" ? "active" : "")">Aciliyet İşlemleri</a>
                 <a href="#" class="list-group-item list-group-item-action">Overview</a>
                 <a href="#" class="list-group-item list-group-item-action">Events</a>
                 <a href="#" class="list-group-item list-group-item-action">Profile</a>

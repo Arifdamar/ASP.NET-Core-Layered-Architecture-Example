@@ -21,6 +21,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            TempData["Active"] = "urgency";
             List<Urgency> urgencies = _urgencyService.GetAll();
             List<UrgencyListViewModel> viewModel = new List<UrgencyListViewModel>();
 
@@ -38,6 +39,8 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult AddUrgency()
         {
+            TempData["Active"] = "urgency";
+
             return View(new AddUrgencyViewModel());
         }
 
@@ -55,6 +58,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult UpdateUrgency(int id)
         {
+            TempData["Active"] = "urgency";
             var urgency = _urgencyService.GetById(id);
             UpdateUrgencyViewModel model = new UpdateUrgencyViewModel()
             {
