@@ -1,0 +1,45 @@
+﻿@model Arif.ToDo.Web.Models.AppUserAddViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_StandardLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <form asp-action="Register" method="post" class="mt-3 mx-auto p-3 shadow">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <span asp-validation-for="UserName" class="text-danger"></span>
+            <input asp-for="UserName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <input asp-for="ConfirmPassword" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="SurName"></label>
+            <span asp-validation-for="SurName" class="text-danger"></span>
+            <input asp-for="SurName" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-success btn-sm">Kayıt Ol</button>
+        <button class="btn btn-warning btn-sm">Vazgeç</button>
+    </form>
+</div>
+

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Controllers
@@ -19,6 +20,11 @@ namespace Arif.ToDo.Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View(new AppUserAddViewModel());
         }
     }
 }

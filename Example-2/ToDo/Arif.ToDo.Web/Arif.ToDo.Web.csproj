@@ -5,14 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Arif.ToDo.Business\Arif.ToDo.Business.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\lib\bootswatch\" />
@@ -20,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Arif.ToDo.Business\Arif.ToDo.Business.csproj" />
   </ItemGroup>
 
 </Project>
