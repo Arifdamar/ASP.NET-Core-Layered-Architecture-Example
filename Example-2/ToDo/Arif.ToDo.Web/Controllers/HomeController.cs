@@ -51,7 +51,7 @@ namespace Arif.ToDo.Web.Controllers
 
                     if (addRoleResult.Succeeded)
                     {
-                        return RedirectToAction("SignIn");
+                        return RedirectToAction("Index");
                     }
 
                     foreach (var error in addRoleResult.Errors)
