@@ -42,6 +42,16 @@ namespace Arif.ToDo.Web
                 })
                 .AddEntityFrameworkStores<TodoContext>();
 
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.Name = "IsTakipCookie";
+                opt.Cookie.SameSite = SameSiteMode.Strict;
+                opt.Cookie.HttpOnly = true;
+                opt.ExpireTimeSpan = TimeSpan.FromDays(20);
+                opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                opt.LoginPath = "Home/Index";
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -54,6 +64,7 @@ namespace Arif.ToDo.Web
             }
 
             app.UseRouting();
+            // ReSharper disable once AsyncConverter.AsyncWait
             IdentityInitializer.SeedData(userManager, roleManager).Wait();
             app.UseStaticFiles();
 
