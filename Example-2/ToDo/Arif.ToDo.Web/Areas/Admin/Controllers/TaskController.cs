@@ -105,5 +105,12 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        public IActionResult DeleteTask(int id)
+        {
+            _taskService.Delete(new Task() { Id = id });
+
+            return Json(null);
+        }
     }
 }
