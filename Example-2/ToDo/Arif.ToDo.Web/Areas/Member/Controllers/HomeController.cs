@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Areas.Member.Controllers
 {
+    [Authorize(Roles = "Member")]
     [Area("Member")]
     public class HomeController : Controller
     {

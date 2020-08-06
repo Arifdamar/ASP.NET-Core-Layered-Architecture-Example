@@ -16,5 +16,8 @@ namespace Arif.ToDo.Web.Models
         [DataType(DataType.Password)]
         [Display(Name = "Şifre")]
         public string Password { get; set; }
+
+        [Display(Name = "Beni Hatırla")]
+        public bool RememberMe { get; set; }
     }
 }

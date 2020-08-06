@@ -49,7 +49,7 @@ namespace Arif.ToDo.Web
                 opt.Cookie.HttpOnly = true;
                 opt.ExpireTimeSpan = TimeSpan.FromDays(20);
                 opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                opt.LoginPath = "Home/Index";
+                opt.LoginPath = "/Home/Index";
             });
 
             services.AddControllersWithViews();
@@ -64,6 +64,8 @@ namespace Arif.ToDo.Web
             }
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             // ReSharper disable once AsyncConverter.AsyncWait
             IdentityInitializer.SeedData(userManager, roleManager).Wait();
             app.UseStaticFiles();
