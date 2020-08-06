@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class UrgencyController : Controller
     {

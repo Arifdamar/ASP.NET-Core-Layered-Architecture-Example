@@ -32,7 +32,7 @@
             <div class="list-group list-group-flush">
                 <a asp-controller="Task" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "task" ? "active" : "")">Görev İşlemleri</a>
                 <a asp-controller="Urgency" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "urgency" ? "active" : "")">Aciliyet İşlemleri</a>
-                <a href="#" class="list-group-item list-group-item-action">Overview</a>
+                <a href="#" class="list-group-item list-group-item-action @(activePage == "taskOrder" ? "active" : "")">Görev Atama İşlemleri</a>
                 <a href="#" class="list-group-item list-group-item-action">Events</a>
                 <a href="#" class="list-group-item list-group-item-action">Profile</a>
                 <a href="#" class="list-group-item list-group-item-action">Status</a>
