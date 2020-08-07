@@ -45,5 +45,10 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _workRepository.GetUndoneTasksWithUrgency();
         }
+
+        public List<Task> GetAllTasksWithAllFields()
+        {
+            return _workRepository.GetAllTasksWithAllFields();
+        }
     }
 }

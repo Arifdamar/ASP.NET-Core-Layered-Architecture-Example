@@ -12,13 +12,25 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
     {
         public List<Task> GetUndoneTasksWithUrgency()
         {
-            using (var context = new TodoContext())
-            {
-                return context.Tasks.Include(I => I.Urgency)
-                    .Where(I => !I.Status)
-                    .OrderByDescending(I => I.CratedDate)
-                    .ToList();
-            }
+            using var context = new TodoContext();
+
+            return context.Tasks.Include(I => I.Urgency)
+                .Where(I => !I.Status)
+                .OrderByDescending(I => I.CratedDate)
+                .ToList();
+        }
+
+        public List<Task> GetAllTasksWithAllFields()
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Include(I => I.Urgency)
+                .Include(I => I.AppUser)
+                .Include(I => I.Report)
+                .Where(I => !I.Status)
+                .OrderByDescending(I => I.CratedDate)
+                .ToList();
         }
     }
 }
