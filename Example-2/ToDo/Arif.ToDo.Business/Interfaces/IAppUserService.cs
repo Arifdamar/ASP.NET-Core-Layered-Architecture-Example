@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Arif.ToDo.Entities.Concrete;
 
-namespace Arif.ToDo.DataAccess.Interfaces
+namespace Arif.ToDo.Business.Interfaces
 {
-    public interface IAppUserDal
+    public interface IAppUserService
     {
         List<AppUser> GetNonAdminUsers();
     }
