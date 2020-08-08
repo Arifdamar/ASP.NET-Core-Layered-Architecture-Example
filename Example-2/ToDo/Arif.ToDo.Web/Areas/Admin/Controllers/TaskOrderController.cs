@@ -46,5 +46,21 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        public IActionResult Assign(int id)
+        {
+            var task = _taskService.GetTaskByIdWithUrgency(id);
+
+            TaskListViewModel model = new TaskListViewModel()
+            {
+                Id = task.Id,
+                Name = task.Name,
+                Description = task.Description,
+                CratedDate = task.CratedDate,
+                Urgency = task.Urgency
+            };
+
+            return View(model);
+        }
     }
 }

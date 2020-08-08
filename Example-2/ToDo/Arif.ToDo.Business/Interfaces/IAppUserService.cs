@@ -8,5 +8,6 @@ namespace Arif.ToDo.Business.Interfaces
     public interface IAppUserService
     {
         List<AppUser> GetNonAdminUsers();
+        List<AppUser> GetNonAdminUsers(string keyword, int activePage = 1);
     }
 }

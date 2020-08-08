@@ -20,5 +20,10 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _appUserDal.GetNonAdminUsers();
         }
+
+        public List<AppUser> GetNonAdminUsers(string keyword, int activePage = 1)
+        {
+            return _appUserDal.GetNonAdminUsers(keyword, activePage);
+        }
     }
 }
