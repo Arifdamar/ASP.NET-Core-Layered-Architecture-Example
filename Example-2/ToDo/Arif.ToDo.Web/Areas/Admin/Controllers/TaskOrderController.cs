@@ -47,11 +47,28 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        public IActionResult Assign(int id)
+        public IActionResult Assign(int id, string keyword, int activePage = 1)
         {
+            TempData["Active"] = "taskOrder";
             var task = _taskService.GetTaskByIdWithUrgency(id);
+            var personnel = _appUserService.GetNonAdminUsers(keyword, activePage);
+            List<AppUserListViewModel> appUserListModels = new List<AppUserListViewModel>();
 
-            TaskListViewModel model = new TaskListViewModel()
+            personnel.ForEach(personnel =>
+            {
+                appUserListModels.Add(new AppUserListViewModel()
+                {
+                    Id = personnel.Id,
+                    Email = personnel.Email,
+                    Name = personnel.Name,
+                    SurName = personnel.SurName,
+                    Picture = personnel.Picture
+                });
+            });
+
+            ViewBag.Personnel = appUserListModels;
+
+            TaskListViewModel taskModel = new TaskListViewModel()
             {
                 Id = task.Id,
                 Name = task.Name,
@@ -60,7 +77,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
                 Urgency = task.Urgency
             };
 
-            return View(model);
+            return View(taskModel);
         }
     }
 }
