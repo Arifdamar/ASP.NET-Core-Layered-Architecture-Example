@@ -25,40 +25,56 @@
                 <th>
                     Aciliyet
                 </th>
+                <th>
+                    Rapor Sayısı
+                </th>
+                <th>
+                    İşlem
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var task in Model)
             {
             <tr>
                 <td>
-                    @item.Name
+                    @task.Name
                 </td>
                 <td>
-                    @item.Description
+                    @task.Description
                 </td>
                 <td>
-                    @item.CratedDate
+                    @task.CratedDate
                 </td>
                 <td>
                     @{
-                        if (item.AppUser == null)
+                        if (task.AppUser == null)
                         {
                             <span class="badge badge-danger">Bu görevde çalışan yok.</span>
                         }
                         else
                         {
-                            <span class="badge badge-success">Bu görevde @item.AppUser.Name çalışıyor.</span>
+                            <span class="badge badge-success">Bu görevde @task.AppUser.Name çalışıyor.</span>
                         }
                     }
                 </td>
                 <td>
-                    @item.Urgency.Description
+                    @task.Urgency.Description
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @task.Report.Count
+                </td>
+                <td>
+                    @{
+                        if (task.AppUser == null)
+                        {
+                            <a asp-action="Assignment" asp-controller="TaskOrder" asp-route-id="@task.Id" class="btn btn-warning btn-sm">Personel Ata</a>
+                        }
+                        else
+                        {
+                            <a asp-action="ShowDetails" asp-controller="TaskOrder" asp-route-id="@task.Id" class="btn btn-info btn-sm">Detay Göster</a>
+                        }
+                    }
                 </td>
             </tr>
             }

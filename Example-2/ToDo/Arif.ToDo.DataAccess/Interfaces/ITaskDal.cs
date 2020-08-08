@@ -7,5 +7,6 @@ namespace Arif.ToDo.DataAccess.Interfaces
     {
         List<Task> GetUndoneTasksWithUrgency();
         List<Task> GetAllTasksWithAllFields();
+        Task GetTaskByIdWithUrgency(int id);
     }
 }

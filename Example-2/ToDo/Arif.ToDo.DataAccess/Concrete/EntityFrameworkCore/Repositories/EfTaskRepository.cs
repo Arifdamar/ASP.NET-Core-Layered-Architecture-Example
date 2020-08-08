@@ -32,5 +32,14 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .OrderByDescending(I => I.CratedDate)
                 .ToList();
         }
+
+        public Task GetTaskByIdWithUrgency(int id)
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Include(I => I.Urgency)
+                .FirstOrDefault(I => !I.Status && I.Id == id);
+        }
     }
 }

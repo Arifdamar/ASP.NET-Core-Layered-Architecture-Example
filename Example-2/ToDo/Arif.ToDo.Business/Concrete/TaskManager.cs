@@ -50,5 +50,10 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _workRepository.GetAllTasksWithAllFields();
         }
+
+        public Task GetTaskByIdWithUrgency(int id)
+        {
+            return _workRepository.GetTaskByIdWithUrgency(id);
+        }
     }
 }

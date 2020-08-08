@@ -8,6 +8,7 @@ namespace Arif.ToDo.Business.Interfaces
     public interface ITaskService : IGenericService<Task>
     {
         List<Task> GetUndoneTasksWithUrgency();
-        public List<Task> GetAllTasksWithAllFields();
+        List<Task> GetAllTasksWithAllFields();
+        Task GetTaskByIdWithUrgency(int id);
     }
 }
