@@ -50,19 +50,21 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
         public IActionResult Assign(int id, string keyword, int activePage = 1)
         {
             TempData["Active"] = "taskOrder";
+            ViewBag.ActivePage = activePage;
+            ViewBag.TotalPage = (int)Math.Ceiling((double)_appUserService.GetNonAdminUsers().Count / 3);
             var task = _taskService.GetTaskByIdWithUrgency(id);
             var personnel = _appUserService.GetNonAdminUsers(keyword, activePage);
             List<AppUserListViewModel> appUserListModels = new List<AppUserListViewModel>();
 
-            personnel.ForEach(personnel =>
+            personnel.ForEach(user =>
             {
                 appUserListModels.Add(new AppUserListViewModel()
                 {
-                    Id = personnel.Id,
-                    Email = personnel.Email,
-                    Name = personnel.Name,
-                    SurName = personnel.SurName,
-                    Picture = personnel.Picture
+                    Id = user.Id,
+                    Email = user.Email,
+                    Name = user.Name,
+                    SurName = user.SurName,
+                    Picture = user.Picture
                 });
             });
 
