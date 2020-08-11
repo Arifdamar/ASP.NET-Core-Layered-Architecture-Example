@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
@@ -85,6 +84,16 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             };
 
             return View(taskModel);
+        }
+
+        [HttpPost]
+        public IActionResult Assign(PersonnelAssignViewModel model)
+        {
+            var taskToUpdate = _taskService.GetById(model.TaskId);
+            taskToUpdate.AppUserId = model.PersonnelId;
+            _taskService.Update(taskToUpdate);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult PersonnelAssign(PersonnelAssignViewModel model)

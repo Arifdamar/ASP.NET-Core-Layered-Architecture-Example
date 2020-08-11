@@ -52,13 +52,15 @@
 <div class="row mt-2">
 
     <div class="col-md-12 mt-3">
-        <form>
+        <form asp-action="Assign" method="post">
             <p class="lead text-center">
                 <strong class="text-primary">@Model.Task.Name</strong> Görevi <strong class="text-primary">@Model.AppUser.Name</strong> Çalışanına Atanacaktır. Onaylıyor musunuz?
             </p>
             <div class="form-group text-center">
-                <button class="btn btn-info btn-sm">Ata</button>
-                <button class="btn btn-warning btn-sm" asp-action="Assign" asp-route-id="@Model.Task.Id">Vazgeç</button>
+                <input type="hidden" name="PersonnelId" value="@Model.AppUser.Id" />
+                <input type="hidden" name="TaskId" value="@Model.Task.Id" />
+                <button class="btn btn-info" type="submit">Ata</button>
+                <button class="btn btn-warning" asp-action="Assign" asp-route-id="@Model.Task.Id">Vazgeç</button>
             </div>
         </form>
     </div>
