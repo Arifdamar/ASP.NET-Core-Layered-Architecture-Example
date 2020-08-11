@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Areas.Admin.Controllers
@@ -15,11 +17,13 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
     {
         private readonly IAppUserService _appUserService;
         private readonly ITaskService _taskService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public TaskOrderController(IAppUserService appUserService, ITaskService taskService)
+        public TaskOrderController(IAppUserService appUserService, ITaskService taskService, UserManager<AppUser> userManager)
         {
             _appUserService = appUserService;
             _taskService = taskService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -81,6 +85,34 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             };
 
             return View(taskModel);
+        }
+
+        public IActionResult PersonnelAssign(PersonnelAssignViewModel model)
+        {
+            TempData["Active"] = "taskOrder";
+            var user = _userManager.Users.FirstOrDefault(I => I.Id == model.PersonnelId);
+            var task = _taskService.GetTaskByIdWithUrgency(model.TaskId);
+
+            PersonnelAssignListViewModel viewModel = new PersonnelAssignListViewModel()
+            {
+                AppUser = new AppUserListViewModel()
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    Name = user.Name,
+                    SurName = user.SurName,
+                    Picture = user.Picture
+                },
+                Task = new TaskListViewModel()
+                {
+                    Id = task.Id,
+                    Name = task.Name,
+                    Description = task.Description,
+                    Urgency = task.Urgency
+                }
+            };
+
+            return View(viewModel);
         }
     }
 }
