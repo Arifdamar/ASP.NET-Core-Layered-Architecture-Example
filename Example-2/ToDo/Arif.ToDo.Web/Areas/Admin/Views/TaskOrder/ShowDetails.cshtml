@@ -1,0 +1,41 @@
+﻿@model AllTasksListViewModel
+@{
+    ViewData["Title"] = "ShowDetails";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@if (Model.Report.Count > 0)
+{
+    <a class="btn btn-info mt-2">Excelde Görüntüle</a>
+    <table class="table table-bordered table-hover table-sm mt-2">
+        <tr>
+            <th colspan="2" class="text-center">
+                @Model.AppUser.Name @Model.AppUser.SurName personelinin, @Model.Name görevi için yazmış olduğu raporlar
+            </th>
+        </tr>
+        <tr>
+            <th>
+                Tanım
+            </th>
+            <th>
+                Detay
+            </th>
+        </tr>
+        @foreach (var report in Model.Report)
+        {
+            <tr>
+                <td>@report.Definition</td>
+                <td>@report.Description</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="border border-dark mt-2 text-center">
+        <p class="lead text-center">
+            Bu görev üzerinde çalışan <strong class="text-primary">@Model.AppUser.Name @Model.AppUser.SurName</strong>, <strong class="text-primary">@Model.Name</strong> görevi için henüz hiç rapor yazmamış.
+        </p>
+    </div>
+}

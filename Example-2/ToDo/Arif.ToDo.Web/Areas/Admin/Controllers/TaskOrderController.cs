@@ -123,5 +123,19 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
             return View(viewModel);
         }
+
+        public IActionResult ShowDetails(int id)
+        {
+            var task = _taskService.GetTaskByIdWithReportsAndUser(id);
+            AllTasksListViewModel model = new AllTasksListViewModel()
+            {
+                Name = task.Name,
+                Description = task.Description,
+                Report = task.Report,
+                AppUser = task.AppUser
+            };
+
+            return View(model);
+        }
     }
 }

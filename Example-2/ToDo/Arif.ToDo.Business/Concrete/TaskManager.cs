@@ -60,5 +60,10 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _workRepository.GetByUserId(userId);
         }
+
+        public Task GetTaskByIdWithReportsAndUser(int id)
+        {
+            return _workRepository.GetTaskByIdWithReportsAndUser(id);
+        }
     }
 }
