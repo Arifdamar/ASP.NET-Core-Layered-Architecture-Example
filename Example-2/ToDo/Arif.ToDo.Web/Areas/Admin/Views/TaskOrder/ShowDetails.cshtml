@@ -7,7 +7,8 @@
 
 @if (Model.Report.Count > 0)
 {
-    <a class="btn btn-info mt-2">Excelde Görüntüle</a>
+    <a asp-action="Excel" class="btn btn-outline-info my-2"><i class="far fa-file-excel mr-2"></i>Excel</a>
+    <a asp-action="Pdf" class="btn btn-outline-info my-2"><i class="far fa-file-pdf mr-2"></i>PDF</a>
     <table class="table table-bordered table-hover table-sm mt-2">
         <tr>
             <th colspan="2" class="text-center">

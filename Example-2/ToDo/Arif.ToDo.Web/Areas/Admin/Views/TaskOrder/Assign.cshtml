@@ -6,7 +6,7 @@
 
 <div class="row mt-3">
     <div class="col-md-4">
-        <div class="card border border-primary">
+        <div class="card">
             <div class="card-header bg-primary">
                 <h4 class="text-center lead pt-2">Görev Bilgileri</h4>
             </div>
@@ -56,10 +56,10 @@
 
         @foreach (var worker in (List<AppUserListViewModel>)ViewBag.Personnel)
         {
-            <div class="card mb-3 border border-primary">
+            <div class="card mb-3">
                 <div class="row no-gutters">
                     <div class="col-md-4 p-2">
-                        <img src="~/img/@worker.Picture" class="card-img img-fluid" style="max-width: 50%;" alt="@worker.Name">
+                        <img src="~/img/@worker.Picture" class="card-img img-fluid w-50" alt="@worker.Name">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">

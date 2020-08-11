@@ -7,11 +7,11 @@
 
 @if (Model.Count != 0)
 {
-    <a asp-controller="Task" asp-action="AddTask" class="btn btn-info btn-sm my-2">Add New Urgency</a>
+    <a asp-controller="Task" asp-action="AddTask" class="btn btn-outline-info my-2"><i class="fas fa-plus-circle mr-2"></i>Yeni Göre Ekle</a>
 
     <table class="table table-sm table-hover">
         <thead>
-            <tr>
+            <tr class="text-center align-middle">
                 <th>Ad</th>
                 <th>Açıklama</th>
                 <th>Oluşturulma Tarihi</th>
@@ -24,21 +24,21 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td class="text-center align-middle">
                         @item.Name
                     </td>
-                    <td>
+                    <td class="text-center align-middle">
                         @item.Description
                     </td>
-                    <td>
+                    <td class="text-center align-middle">
                         @item.CratedDate.ToString(CultureInfo.CurrentCulture)
                     </td>
-                    <td>
+                    <td class="text-center align-middle">
                         @item.Urgency.Description
                     </td>
-                    <td>
-                        <a asp-action="UpdateTask" asp-controller="Task" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Güncelle</a>
-                        <a data-toggle="modal" data-target="#deleteModal" data-id="@item.Id" class="btn btn-warning btn-sm">Sil</a>
+                    <td class="text-center align-middle">
+                        <a asp-action="UpdateTask" asp-controller="Task" asp-route-id="@item.Id" class="btn btn-warning"><i class="far fa-edit"></i></a>
+                        <a data-toggle="modal" data-target="#deleteModal" data-id="@item.Id" class="btn btn-warning"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
             }

@@ -6,7 +6,7 @@
 
 <div class="row mt-2">
     <div class="col-md-4">
-        <div class="card border border-primary">
+        <div class="card">
             <div class="card-header bg-primary">
                 <h4 class="text-center lead pt-2">Görev Bilgileri</h4>
             </div>
@@ -26,13 +26,13 @@
     </div>
 
     <div class="col-md-8">
-        <div class="card mb-3 border border-primary">
+        <div class="card">
             <div class="card-header bg-primary">
                 <h4 class="text-center lead pt-2">Personel Bilgileri</h4>
             </div>
             <div class="row no-gutters">
                 <div class="col-md-4 p-2">
-                    <img src="~/img/@Model.AppUser.Picture" class="card-img img-fluid" style="max-width: 50%;" alt="@Model.AppUser.Name">
+                    <img src="~/img/@Model.AppUser.Picture" class="card-img img-fluid w-50" alt="@Model.AppUser.Name">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -59,8 +59,8 @@
             <div class="form-group text-center">
                 <input type="hidden" name="PersonnelId" value="@Model.AppUser.Id" />
                 <input type="hidden" name="TaskId" value="@Model.Task.Id" />
-                <button class="btn btn-info" type="submit">Ata</button>
-                <button class="btn btn-warning" asp-action="Assign" asp-route-id="@Model.Task.Id">Vazgeç</button>
+                <button class="btn btn-warning" asp-action="Assign" asp-route-id="@Model.Task.Id"><i class="far fa-window-close mr-2"></i>Vazgeç</button>
+                <button class="btn btn-info" type="submit"><i class="fas fa-check mr-2"></i>Ata</button>
             </div>
         </form>
     </div>

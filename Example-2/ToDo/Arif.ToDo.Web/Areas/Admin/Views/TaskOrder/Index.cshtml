@@ -10,25 +10,22 @@
     <table class="table table-hover table-sm mt-2">
         <thead>
             <tr>
-                <th>
+                <th class="text-center align-middle">
                     Görev Adı
                 </th>
-                <th>
-                    Açıklama
-                </th>
-                <th>
+                <th class="text-center align-middle">
                     Oluşturulma Tarihi
                 </th>
-                <th>
+                <th class="text-center align-middle">
                     Görevli
                 </th>
-                <th>
+                <th class="text-center align-middle">
                     Aciliyet
                 </th>
-                <th>
+                <th class="text-center align-middle">
                     Rapor Sayısı
                 </th>
-                <th>
+                <th class="text-center align-middle">
                     İşlem
                 </th>
             </tr>
@@ -37,16 +34,13 @@
             @foreach (var task in Model)
             {
             <tr>
-                <td>
+                <td class="text-center align-middle">
                     @task.Name
                 </td>
-                <td>
-                    @task.Description
-                </td>
-                <td>
+                <td class="text-center align-middle">
                     @task.CratedDate
                 </td>
-                <td>
+                <td class="text-center align-middle">
                     @{
                         if (task.AppUser == null)
                         {
@@ -58,21 +52,21 @@
                         }
                     }
                 </td>
-                <td>
+                <td class="text-center align-middle">
                     @task.Urgency.Description
                 </td>
-                <td>
+                <td class="text-center align-middle">
                     @task.Report.Count
                 </td>
-                <td>
+                <td class="text-center align-middle">
                     @{
                         if (task.AppUser == null)
                         {
-                            <a asp-action="Assign" asp-controller="TaskOrder" asp-route-id="@task.Id" class="btn btn-warning btn-sm">Personel Ata</a>
+                            <a asp-action="Assign" asp-controller="TaskOrder" asp-route-id="@task.Id" class="btn btn-warning"><i class="fas fa-user-plus mr-2"></i>Personel Ata</a>
                         }
                         else
                         {
-                            <a asp-action="ShowDetails" asp-controller="TaskOrder" asp-route-id="@task.Id" class="btn btn-info btn-sm">Detay Göster</a>
+                            <a asp-action="ShowDetails" asp-controller="TaskOrder" asp-route-id="@task.Id" class="btn btn-info"><i class="fas fa-info-circle mr-2"></i>Detay Göster</a>
                         }
                     }
                 </td>

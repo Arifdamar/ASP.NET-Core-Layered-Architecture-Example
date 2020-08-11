@@ -1,6 +1,4 @@
-﻿@{
-    string activePage = TempData["Active"]?.ToString();
-}
+﻿@{ string activePage = TempData["Active"]?.ToString(); }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="~/lib/template-css/simple-sidebar.css" rel="stylesheet" />
+    <link href="~/lib/fontAwesome/css/all.min.css" rel="stylesheet" />
 
 </head>
 
@@ -30,20 +29,22 @@
         <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Admin Layout</div>
             <div class="list-group list-group-flush">
-                <a asp-controller="Task" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "task" ? "active" : "")">Görev İşlemleri</a>
-                <a asp-controller="Urgency" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "urgency" ? "active" : "")">Aciliyet İşlemleri</a>
-                <a asp-controller="TaskOrder" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "taskOrder" ? "active" : "")">Görev Atama İşlemleri</a>
-                <a href="#" class="list-group-item list-group-item-action">Events</a>
-                <a href="#" class="list-group-item list-group-item-action">Profile</a>
-                <a href="#" class="list-group-item list-group-item-action">Status</a>
+                <a asp-controller="Task" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "task" ? "active" : "")"><i class="fas fa-tasks mr-2"></i>Görev İşlemleri</a>
+                <a asp-controller="Urgency" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "urgency" ? "active" : "")"><i class="fas fa-exclamation-triangle mr-2"></i>Aciliyet İşlemleri</a>
+                <a asp-controller="TaskOrder" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "taskOrder" ? "active" : "")"><i class="far fa-address-card mr-2"></i>Görev Atama İşlemleri</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-pie mr-2"></i>Grafikler</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-bar mr-2"></i>İstatistikler</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-bell mr-2"></i>Bildirimler</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="far fa-user-circle mr-2"></i>Profil</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt mr-2"></i>Çıkış Yap</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+            <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+                <button class="btn btn-outline-primary" id="menu-toggle"><i class="fas fa-exchange-alt mr-2"></i>Menü</button>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -84,12 +85,13 @@
     <!-- Bootstrap core JavaScript -->
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/fontAwesome/js/all.min.js"></script>
 
     @RenderSection("Javascript", false)
 
     <!-- Menu Toggle Script -->
     <script>
-    $("#menu-toggle").click(function (e) {
+        $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });</script>

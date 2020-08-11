@@ -126,6 +126,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult ShowDetails(int id)
         {
+            TempData["Active"] = "taskOrder";
             var task = _taskService.GetTaskByIdWithReportsAndUser(id);
             AllTasksListViewModel model = new AllTasksListViewModel()
             {
