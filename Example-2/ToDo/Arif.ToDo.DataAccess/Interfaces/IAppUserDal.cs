@@ -8,6 +8,6 @@ namespace Arif.ToDo.DataAccess.Interfaces
     public interface IAppUserDal
     {
         List<AppUser> GetNonAdminUsers();
-        List<AppUser> GetNonAdminUsers(string keyword, int activePage);
+        List<AppUser> GetNonAdminUsers(out int totalPage, string keyword, int activePage);
     }
 }

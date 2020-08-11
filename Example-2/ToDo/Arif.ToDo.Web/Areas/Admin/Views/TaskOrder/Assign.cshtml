@@ -31,20 +31,46 @@
         </div>
     </div>
     <div class="col-md-8">
+
+        <div class="row">
+            <div class="col-md-9">
+                @if (!string.IsNullOrWhiteSpace(ViewBag.Keyword))
+                {
+                    <div class="p-3">
+                        <strong>
+                            @ViewBag.Keyword
+                        </strong>
+                        aramasının sonuçlarını görüyorsunuz.
+                        <a asp-action="Assign" asp-route-id="@Model.Id">Filtreyi Kaldır</a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-3">
+                <form method="get" asp-action="Assign" class="text-right p-3">
+                    <input type="text" name="keyword" class="form-control-sm border-left-0 border-top-0 border-right-0 border-primary" />
+                    <button type="submit" class="btn btn-primary btn-sm">Ara</button>
+                </form>
+            </div>
+        </div>
+
+
         @foreach (var worker in (List<AppUserListViewModel>)ViewBag.Personnel)
         {
-            <div class="card mb-3">
+            <div class="card mb-3 border border-primary">
                 <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="~/img/@worker.Picture" class="card-img" alt="@worker.Name">
+                    <div class="col-md-4 p-2">
+                        <img src="~/img/@worker.Picture" class="card-img img-fluid" style="max-width: 50%;" alt="@worker.Name">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">@worker.Name @worker.SurName</h5>
                             <p class="card-text">
-                                Bir görev almış mı?
+                                <GetTaskByUserId app-user-id="@worker.Id"></GetTaskByUserId>
                             </p>
-                            <p class="card-text"><small class="text-muted">@worker.Email</small></p>
+                            <p class="card-text">
+                                <small class="text-muted">@worker.Email</small>
+                                <a href="" class="btn btn-primary btn-sm float-right">Görevlendir</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -52,9 +78,16 @@
         }
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
                 {
-                    <li class="page-item @(ViewBag.ActivePage == i ? "active": "")"><a class="page-link" asp-action="Assign" asp-route-id="@Model.Id" asp-route-activePage="@i">@i</a></li>
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.Keyword))
+                    {
+                        <li class="page-item @(ViewBag.ActivePage == i ? "active" : "")"><a class="page-link" asp-action="Assign" asp-route-id="@Model.Id" asp-route-activePage="@i" asp-route-keyword="@ViewBag.Keyword">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item @(ViewBag.ActivePage == i ? "active" : "")"><a class="page-link" asp-action="Assign" asp-route-id="@Model.Id" asp-route-activePage="@i">@i</a></li>
+                    }
                 }
             </ul>
         </nav>

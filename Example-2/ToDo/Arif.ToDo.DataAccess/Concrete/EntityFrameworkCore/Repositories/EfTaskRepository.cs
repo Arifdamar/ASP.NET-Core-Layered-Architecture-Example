@@ -41,5 +41,14 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Include(I => I.Urgency)
                 .FirstOrDefault(I => !I.Status && I.Id == id);
         }
+
+        public List<Task> GetByUserId(int userId)
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Where(I => I.AppUserId == userId)
+                .ToList();
+        }
     }
 }

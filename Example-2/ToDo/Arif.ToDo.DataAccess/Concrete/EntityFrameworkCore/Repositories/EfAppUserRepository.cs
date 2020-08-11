@@ -40,7 +40,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 }).ToList();
         }
 
-        public List<AppUser> GetNonAdminUsers(string keyword, int activePage = 1)
+        public List<AppUser> GetNonAdminUsers(out int totalPage, string keyword, int activePage = 1)
         {
             using var context = new TodoContext();
 
@@ -74,6 +74,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 result = result.Where(I => I.Name.ToLower().Contains(keyword.ToLower()) || I.SurName.ToLower().Contains(keyword.ToLower()));
             }
 
+            totalPage = (int)Math.Ceiling((double)result.Count() / 3);
             result = result.Skip((activePage - 1) * 3).Take(3);
 
             return result.ToList();
