@@ -17,12 +17,14 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
         private readonly IAppUserService _appUserService;
         private readonly ITaskService _taskService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IFileService _fileService;
 
-        public TaskOrderController(IAppUserService appUserService, ITaskService taskService, UserManager<AppUser> userManager)
+        public TaskOrderController(IAppUserService appUserService, ITaskService taskService, UserManager<AppUser> userManager, IFileService fileService)
         {
             _appUserService = appUserService;
             _taskService = taskService;
             _userManager = userManager;
+            _fileService = fileService;
         }
 
         public IActionResult Index()
@@ -130,6 +132,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             var task = _taskService.GetTaskByIdWithReportsAndUser(id);
             AllTasksListViewModel model = new AllTasksListViewModel()
             {
+                Id = task.Id,
                 Name = task.Name,
                 Description = task.Description,
                 Report = task.Report,
@@ -137,6 +140,18 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             };
 
             return View(model);
+        }
+
+        public IActionResult ExportExcel(int id)
+        {
+            return File(_fileService.ExportExcel(_taskService.GetTaskByIdWithReportsAndUser(id).Report), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Guid.NewGuid() + ".xlsx");
+        }
+
+        public IActionResult ExportPdf(int id)
+        {
+            var path = _fileService.ExportPdf(_taskService.GetTaskByIdWithReportsAndUser(id).Report);
+
+            return File(path, "application/pdf", Guid.NewGuid() + ".pdf");
         }
     }
 }

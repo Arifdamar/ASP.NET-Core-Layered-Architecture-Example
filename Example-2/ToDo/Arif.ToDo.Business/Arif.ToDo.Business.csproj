@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="5.2.1" />
+    <PackageReference Include="EPPlus" Version="5.0.4" />
     <PackageReference Include="FastMember" Version="1.1.0" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.7" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.5" />
   </ItemGroup>
 
   <ItemGroup>

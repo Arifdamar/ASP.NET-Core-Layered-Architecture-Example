@@ -27,6 +27,7 @@ namespace Arif.ToDo.Web
             services.AddScoped<IUrgencyService, UrgencyManager>();
             services.AddScoped<IReportService, ReportManager>();
             services.AddScoped<IAppUserService, AppUserManager>();
+            services.AddScoped<IFileService, FileManager>();
 
             services.AddScoped<ITaskDal, EfTaskRepository>();
             services.AddScoped<IUrgencyDal, EfUrgencyRepository>();

@@ -12,7 +12,7 @@ using OfficeOpenXml.Table;
 
 namespace Arif.ToDo.Business.Concrete
 {
-    public class FileManager : IFileManager
+    public class FileManager : IFileService
     {
         public string ExportPdf<T>(List<T> list) where T : class, new()
         {

@@ -1,0 +1,68 @@
+﻿@model AppUserListViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-3">
+    <form asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="SurName"></label>
+            <span asp-validation-for="SurName" class="text-danger"></span>
+            <input asp-for="SurName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <h5>Mevcut Fotoğrafınız</h5>
+                        <img src="~/img/@Model.Picture" alt="@Model.Name" class="w-50" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-4">
+                    <div id="photoPreviewDiv"class="text-center" style="display: none !important;">
+                        <h5>Seçtiğiniz Fotoğraf</h5>
+                        <img src="" alt="@Model.Name" class="w-50" id="photoPreview" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-12 mt-1">
+                    <label>Fotoğraf Seç</label>
+                    <input type="file" class="form-control-file" name="photo" id="photo" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-check mr-2"></i>Kaydet</button>
+        </div>
+    </form>
+</div>
+
+@section Javascript
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#photo").change(function (e) {
+                $("#photoPreviewDiv").show();
+                $("#photoPreview").attr('src', URL.createObjectURL(e.target.files[0]));
+            });
+        });
+    </script>
+}

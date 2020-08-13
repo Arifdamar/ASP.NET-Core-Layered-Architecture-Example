@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Arif.ToDo.Business.Interfaces
 {
-    public interface IFileManager
+    public interface IFileService
     {
         /// <summary>
         /// Geriye üretmiş ve upload etmiş olduğu pdf dosyasının virtual pathini döner.

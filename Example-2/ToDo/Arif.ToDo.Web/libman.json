@@ -8,7 +8,8 @@
       "files": [
         "js/bootstrap.min.js",
         "css/bootstrap.min.css",
-        "js/bootstrap.bundle.min.js"
+        "js/bootstrap.bundle.min.js",
+        "js/bootstrap.bundle.min.js.map"
       ]
     },
     {
@@ -29,7 +30,12 @@
     {
       "library": "font-awesome@5.14.0",
       "destination": "wwwroot/lib/fontAwesome",
-      "files": ["css/all.min.css","js/all.min.js"]
+      "files": [
+        "css/all.min.css",
+        "js/all.min.js",
+        "webfonts/fa-regular-400.woff2",
+        "webfonts/fa-solid-900.woff2"
+      ]
     }
   ]
 }
