@@ -12,6 +12,7 @@
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\lib\bootswatch\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\documents\" />
     <Folder Include="wwwroot\Template\" />
   </ItemGroup>
 

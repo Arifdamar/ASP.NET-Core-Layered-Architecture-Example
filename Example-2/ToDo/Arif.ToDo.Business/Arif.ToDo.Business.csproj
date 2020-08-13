@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.2.1" />
+    <PackageReference Include="FastMember" Version="1.1.0" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Arif.ToDo.DataAccess\Arif.ToDo.DataAccess.csproj" />
   </ItemGroup>
 
