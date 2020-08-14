@@ -1,4 +1,5 @@
-﻿@{ string activePage = TempData["Active"]?.ToString(); }
+﻿@using Microsoft.AspNetCore.Mvc.ViewComponents
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,19 +27,7 @@
     <div class="d-flex" id="wrapper">
 
         <!-- Sidebar -->
-        <div class="border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Admin Layout</div>
-            <div class="list-group list-group-flush">
-                <a asp-controller="Task" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "task" ? "active" : "")"><i class="fas fa-tasks mr-2"></i>Görev İşlemleri</a>
-                <a asp-controller="Urgency" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "urgency" ? "active" : "")"><i class="fas fa-exclamation-triangle mr-2"></i>Aciliyet İşlemleri</a>
-                <a asp-controller="TaskOrder" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "taskOrder" ? "active" : "")"><i class="far fa-address-card mr-2"></i>Görev Atama İşlemleri</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-pie mr-2"></i>Grafikler</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-bar mr-2"></i>İstatistikler</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-bell mr-2"></i>Bildirimler</a>
-                <a asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "profile" ? "active" : "")"><i class="far fa-user-circle mr-2"></i>Profil</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt mr-2"></i>Çıkış Yap</a>
-            </div>
-        </div>
+        @await Component.InvokeAsync("Wrapper")
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">

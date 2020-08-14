@@ -7,6 +7,7 @@ using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Task = Arif.ToDo.Entities.Concrete.Task;
 
 namespace Arif.ToDo.Web.Controllers
 {
@@ -102,6 +103,13 @@ namespace Arif.ToDo.Web.Controllers
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> SignOut()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }

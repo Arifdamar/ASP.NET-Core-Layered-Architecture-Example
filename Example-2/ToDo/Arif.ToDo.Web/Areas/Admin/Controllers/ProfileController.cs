@@ -47,11 +47,6 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             {
                 var userToUpdate = await _userManager.Users.FirstOrDefaultAsync(I => I.Id == model.Id);
 
-                if (userToUpdate.Name == model.Name && userToUpdate.SurName == model.SurName && userToUpdate.Email == model.Email && userToUpdate.Picture == model.Picture)
-                {
-                    return View(model);
-                }
-
                 if (photo != null)
                 {
                     string extension = Path.GetExtension(photo.FileName);
