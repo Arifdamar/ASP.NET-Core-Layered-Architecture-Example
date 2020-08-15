@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories;
@@ -49,6 +50,11 @@ namespace Arif.ToDo.Business.Concrete
         public List<Task> GetAllTasksWithAllFields()
         {
             return _workRepository.GetAllTasksWithAllFields();
+        }
+
+        public List<Task> GetAllTasksWithAllFields(Expression<Func<Task, bool>> filter)
+        {
+            return _workRepository.GetAllTasksWithAllFields(filter);
         }
 
         public Task GetTaskByIdWithUrgency(int id)

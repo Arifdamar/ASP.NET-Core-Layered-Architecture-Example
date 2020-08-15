@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Arif.ToDo.Entities.Concrete;
+﻿using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Arif.ToDo.Web.Areas.Admin.ViewComponents
+namespace Arif.ToDo.Web.ViewComponents
 {
     public class Wrapper : ViewComponent
     {
@@ -31,7 +27,15 @@ namespace Arif.ToDo.Web.Areas.Admin.ViewComponents
                 Picture = user.Picture
             };
 
-            return View(model);
+            // ReSharper disable once AsyncConverter.AsyncWait
+            var roles = _userManager.GetRolesAsync(user).Result;
+
+            if (roles.Contains("Admin"))
+            {
+                return View(model);
+            }
+
+            return View("Member", model);
         }
     }
 }

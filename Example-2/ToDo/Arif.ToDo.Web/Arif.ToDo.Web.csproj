@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Member\Data\" />
-    <Folder Include="Areas\Member\Models\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Member\Models\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\lib\bootswatch\" />

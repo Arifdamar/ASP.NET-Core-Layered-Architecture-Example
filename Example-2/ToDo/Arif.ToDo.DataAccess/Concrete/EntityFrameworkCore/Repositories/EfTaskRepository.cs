@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Contexts;
 using Arif.ToDo.DataAccess.Interfaces;
 using Arif.ToDo.Entities.Concrete;
@@ -29,6 +30,19 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Include(I => I.AppUser)
                 .Include(I => I.Report)
                 .Where(I => !I.Status)
+                .OrderByDescending(I => I.CratedDate)
+                .ToList();
+        }
+
+        public List<Task> GetAllTasksWithAllFields(Expression<Func<Task, bool>> filter)
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Include(I => I.Urgency)
+                .Include(I => I.AppUser)
+                .Include(I => I.Report)
+                .Where(filter)
                 .OrderByDescending(I => I.CratedDate)
                 .ToList();
         }
