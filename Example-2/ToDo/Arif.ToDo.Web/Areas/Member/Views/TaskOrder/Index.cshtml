@@ -16,15 +16,39 @@
     <div class="card mt-3">
         <h5 class="card-header">@task.Name</h5>
         <div class="card-body">
-            <h5 class="card-title">@task.Urgency.Description</h5>
+            <h5 class="card-title">
+                <span class="badge badge-warning">
+                    @task.Urgency.Description
+                </span>
+            </h5>
             <p class="card-text">@task.Description</p>
-            <a href="#" class="btn btn-info">
-                Raporlara Git
-                <span class="badge badge-warning">@task.Report.Count</span>
-            </a>
-            <a href="#" class="btn btn-primary">
-                Görevi Tamamla
-            </a>
+            
+            <p class="text-right">
+                @if (task.Report.Count > 0)
+                {
+                    <a class="btn btn-light" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Raporlara Git<i class="fas fa-caret-down ml-2"></i>
+                        <span class="badge badge-dark">@task.Report.Count</span>
+                    </a>
+                }
+                <a href="#" class="btn btn-light">
+                    Rapor Ekle
+                </a>
+                <a href="#" class="btn btn-dark">
+                    Görevi Tamamla
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                @foreach (var report in task.Report)
+                {
+                    <div class="card card-body mt-2">
+                        <h5 class="card-title">@report.Definition</h5>
+                        <p class="card-text">@report.Description</p>
+                    </div>
+                }
+            </div>
+
+
         </div>
     </div>
 }
