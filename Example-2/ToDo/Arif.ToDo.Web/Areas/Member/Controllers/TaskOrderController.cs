@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
+using Arif.ToDo.Web.Areas.Member.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Areas.Member.Controllers
@@ -13,16 +17,21 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
     public class TaskOrderController : Controller
     {
         private readonly ITaskService _taskService;
+        private readonly IReportService _reportService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public TaskOrderController(ITaskService taskService)
+        public TaskOrderController(ITaskService taskService, IReportService reportService, UserManager<AppUser> userManager)
         {
             _taskService = taskService;
+            _reportService = reportService;
+            _userManager = userManager;
         }
 
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index()
         {
             TempData["Active"] = "taskOrder";
-            var tasks = _taskService.GetAllTasksWithAllFields(I => I.AppUserId == id && !I.Status);
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var tasks = _taskService.GetAllTasksWithAllFields(I => I.AppUserId == user.Id && !I.Status);
 
             List<AllTasksListViewModel> model = new List<AllTasksListViewModel>();
 
@@ -39,6 +48,16 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
                     Urgency = task.Urgency
                 });
             });
+
+            return View(model);
+        }
+
+        public IActionResult AddReport(int id)
+        {
+            ReportAddViewModel model = new ReportAddViewModel()
+            {
+                TaskId = id
+            };
 
             return View(model);
         }
