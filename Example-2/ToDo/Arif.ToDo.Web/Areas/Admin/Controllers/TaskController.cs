@@ -36,7 +36,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
                     Id = task.Id,
                     Name = task.Name,
                     Description = task.Description,
-                    CratedDate = task.CratedDate,
+                    CratedDate = task.CreatedDate,
                     Status = task.Status,
                     UrgencyId = task.UrgencyId,
                     Urgency = task.Urgency

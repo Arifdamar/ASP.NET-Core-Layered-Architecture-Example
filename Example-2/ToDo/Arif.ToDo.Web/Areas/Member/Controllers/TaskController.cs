@@ -41,7 +41,7 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
                     Name = task.Name,
                     Description = task.Description,
                     AppUser = task.AppUser,
-                    CratedDate = task.CratedDate,
+                    CratedDate = task.CreatedDate,
                     Report = task.Report,
                     Urgency = task.Urgency
                 });

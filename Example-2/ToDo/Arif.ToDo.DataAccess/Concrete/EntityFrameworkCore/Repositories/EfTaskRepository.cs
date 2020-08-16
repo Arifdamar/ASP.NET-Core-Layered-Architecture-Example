@@ -17,7 +17,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 
             return context.Tasks.Include(I => I.Urgency)
                 .Where(I => !I.Status)
-                .OrderByDescending(I => I.CratedDate)
+                .OrderByDescending(I => I.CreatedDate)
                 .ToList();
         }
 
@@ -30,7 +30,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Include(I => I.AppUser)
                 .Include(I => I.Report)
                 .Where(I => !I.Status)
-                .OrderByDescending(I => I.CratedDate)
+                .OrderByDescending(I => I.CreatedDate)
                 .ToList();
         }
 
@@ -43,7 +43,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Include(I => I.AppUser)
                 .Include(I => I.Report)
                 .Where(filter)
-                .OrderByDescending(I => I.CratedDate)
+                .OrderByDescending(I => I.CreatedDate)
                 .ToList();
         }
 
@@ -57,7 +57,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Include(I => I.Report)
                 .Where(I => I.AppUserId == userId)
                 .Where(I => I.Status)
-                .OrderByDescending(I => I.CratedDate);
+                .OrderByDescending(I => I.CreatedDate);
 
             totalPage = (int)Math.Ceiling((double)result.Count() / 3);
             var returnValue = result.Skip((activePage - 1) * 3).Take(3);
