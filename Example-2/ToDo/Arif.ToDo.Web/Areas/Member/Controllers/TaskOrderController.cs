@@ -116,5 +116,14 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
 
             return View(model);
         }
+
+        public IActionResult CompleteTask(int id)
+        {
+            var taskToUpdate = _taskService.GetById(id);
+            taskToUpdate.Status = true;
+            _taskService.Update(taskToUpdate);
+
+            return Json(null);
+        }
     }
 }

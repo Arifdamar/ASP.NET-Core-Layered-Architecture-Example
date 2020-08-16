@@ -34,11 +34,11 @@ else
                             <span class="badge badge-dark">@task.Report.Count</span>
                         </a>
                     }
-                <a asp-area="Member" asp-controller="TaskOrder" asp-action="AddReport" asp-route-id="@task.Id" class="btn btn-light">
-                    <i class="fas fa-check mr-2"></i>
-                    Rapor Ekle
-                </a>
-                    <a href="#" class="btn btn-dark">
+                    <a asp-area="Member" asp-controller="TaskOrder" asp-action="AddReport" asp-route-id="@task.Id" class="btn btn-light">
+                        <i class="fas fa-check mr-2"></i>
+                        Rapor Ekle
+                    </a>
+                    <a href="#" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" data-id="@task.Id">
                         Görevi Tamamla
                     </a>
                 </p>
@@ -60,5 +60,56 @@ else
 
             </div>
         </div>
+    }
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Uyarı</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center font-weight-bold lead">
+                    Bu işlemi gerçekleştirmek istediğinizden emin misiniz?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                    <button id="btnSave" type="button" class="btn btn-primary">Evet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section Javascript
+    {
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#exampleModal").on("show.bs.modal",
+                    function(event) {
+                        let triggerElement = $(event.relatedTarget);
+                        let data = triggerElement.data("id");
+
+                        $("#btnSave").click(function() {
+                            $.ajax({
+                                type: "GET",
+                                contentType: "application/json; charset=utf-8",
+                                url: "./TaskOrder/CompleteTask",
+                                data: { id: data },
+                                success: function() {
+                                    alert("İşlem Başarıyla Gerçekleşti");
+                                    location.reload();
+                                },
+                                error: function (error) {
+                                    alert("Bir Hata Oluştu. " + error.responseText);
+                                }
+                            });
+                        });
+                    });
+            });
+        </script>
     }
 }
