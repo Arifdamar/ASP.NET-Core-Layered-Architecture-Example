@@ -47,6 +47,24 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .ToList();
         }
 
+        public List<Task> GetCompletedTasksWithAllFields(out int totalPage, int userId, int activePage = 1)
+        {
+            using var context = new TodoContext();
+
+            var result = context.Tasks
+                .Include(I => I.Urgency)
+                .Include(I => I.AppUser)
+                .Include(I => I.Report)
+                .Where(I => I.AppUserId == userId)
+                .Where(I => I.Status)
+                .OrderByDescending(I => I.CratedDate);
+
+            totalPage = (int)Math.Ceiling((double)result.Count() / 3);
+            var returnValue = result.Skip((activePage - 1) * 3).Take(3);
+
+            return returnValue.ToList();
+        }
+
         public Task GetTaskByIdWithUrgency(int id)
         {
             using var context = new TodoContext();

@@ -57,6 +57,11 @@ namespace Arif.ToDo.Business.Concrete
             return _workRepository.GetAllTasksWithAllFields(filter);
         }
 
+        public List<Task> GetCompletedTasksWithAllFields(out int totalPage, int userId, int activePage)
+        {
+            return _workRepository.GetCompletedTasksWithAllFields(out totalPage, userId, activePage);
+        }
+
         public Task GetTaskByIdWithUrgency(int id)
         {
             return _workRepository.GetTaskByIdWithUrgency(id);

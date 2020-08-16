@@ -52,6 +52,7 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
             return View(model);
         }
 
+        #region AddReport
         public IActionResult AddReport(int id)
         {
             TempData["Active"] = "taskOrder";
@@ -83,7 +84,9 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
 
             return View(model);
         }
+        #endregion
 
+        #region UpdateReport
         public IActionResult UpdateReport(int id)
         {
             TempData["Active"] = "taskOrder";
@@ -116,6 +119,7 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
 
             return View(model);
         }
+        #endregion
 
         public IActionResult CompleteTask(int id)
         {
@@ -125,5 +129,6 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
 
             return Json(null);
         }
+
     }
 }
