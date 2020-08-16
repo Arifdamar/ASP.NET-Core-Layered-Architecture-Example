@@ -7,6 +7,6 @@ namespace Arif.ToDo.Business.Interfaces
 {
     public interface IReportService : IGenericService<Report>
     {
-
+        Report GetReportByIdWithTask(int id);
     }
 }

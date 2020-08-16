@@ -41,5 +41,10 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _reportRepository.GetAll();
         }
+
+        public Report GetReportByIdWithTask(int id)
+        {
+            return _reportRepository.GetReportByIdWithTask(id);
+        }
     }
 }

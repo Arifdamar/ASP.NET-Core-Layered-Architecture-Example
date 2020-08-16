@@ -54,6 +54,7 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
 
         public IActionResult AddReport(int id)
         {
+            TempData["Active"] = "taskOrder";
             var task = _taskService.GetTaskByIdWithUrgency(id);
 
             ReportAddViewModel model = new ReportAddViewModel()
@@ -76,6 +77,39 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
                     Definition = model.Definition,
                     Description = model.Description
                 });
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult UpdateReport(int id)
+        {
+            TempData["Active"] = "taskOrder";
+            var report = _reportService.GetReportByIdWithTask(id);
+            var task = _taskService.GetTaskByIdWithUrgency(report.TaskId);
+
+            ReportUpdateViewModel model = new ReportUpdateViewModel()
+            {
+                Id = id,
+                Definition = report.Definition,
+                Description = report.Description,
+                Task = task
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateReport(ReportUpdateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var reportToUpdate = _reportService.GetById(model.Id);
+                reportToUpdate.Definition = model.Definition;
+                reportToUpdate.Description = model.Description;
+                _reportService.Update(reportToUpdate);
 
                 return RedirectToAction("Index");
             }

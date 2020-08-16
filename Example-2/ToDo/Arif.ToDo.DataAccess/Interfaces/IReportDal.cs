@@ -7,6 +7,6 @@ namespace Arif.ToDo.DataAccess.Interfaces
 {
     public interface IReportDal : IGenericDal<Report>
     {
-
+        Report GetReportByIdWithTask(int id);
     }
 }
