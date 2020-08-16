@@ -54,10 +54,31 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
 
         public IActionResult AddReport(int id)
         {
+            var task = _taskService.GetTaskByIdWithUrgency(id);
+
             ReportAddViewModel model = new ReportAddViewModel()
             {
+                Task = task,
                 TaskId = id
             };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddReport(ReportAddViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _reportService.Save(new Report()
+                {
+                    TaskId = model.TaskId,
+                    Definition = model.Definition,
+                    Description = model.Description
+                });
+
+                return RedirectToAction("Index");
+            }
 
             return View(model);
         }

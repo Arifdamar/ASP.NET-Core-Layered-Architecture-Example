@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
+using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.Web.Areas.Member.Models
 {
@@ -16,6 +16,7 @@ namespace Arif.ToDo.Web.Areas.Member.Models
         [Required(ErrorMessage = "Açıklama alanı boş geçilemez.")]
         public string Description { get; set; }
 
+        public Task Task { get; set; }
         public int TaskId { get; set; }
     }
 }
