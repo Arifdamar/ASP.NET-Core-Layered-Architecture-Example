@@ -28,8 +28,9 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
         {
             TempData["Active"] = "task";
             var user = await _userManager.FindByNameAsync(User.Identity.Name).ConfigureAwait(true);
-            int totalPage;
-            var tasks = _taskService.GetCompletedTasksWithAllFields(out totalPage, user.Id, activePage);
+            var tasks = _taskService.GetCompletedTasksWithAllFields(out var totalPage, user.Id, activePage);
+            ViewBag.TotalPage = totalPage;
+            ViewBag.ActivePage = activePage;
             List<AllTasksListViewModel> model = new List<AllTasksListViewModel>();
 
             tasks.ForEach(task =>

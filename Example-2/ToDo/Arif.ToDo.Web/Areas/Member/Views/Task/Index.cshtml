@@ -47,5 +47,15 @@ else
             </div>
         </div>
     }
+    <nav aria-label="Page navigation example" class="float-right">
+        <ul class="pagination mt-2">
+            @for (int i = 1; i <= ViewBag.TotalPage; i++)
+            {
+                <li class="page-item @(ViewBag.ActivePage == i ? "active": "")">
+                    <a class="page-link" asp-action="Index" asp-route-activePage="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
 }
 
