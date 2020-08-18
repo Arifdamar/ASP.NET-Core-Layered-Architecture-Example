@@ -92,5 +92,14 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Include(I => I.AppUser)
                 .FirstOrDefault(I => I.Id == id);
         }
+
+        public int GetCompletedTaskCountByUserId(int userId)
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Where(I => I.AppUserId == userId)
+                .Count(I => I.Status);
+        }
     }
 }

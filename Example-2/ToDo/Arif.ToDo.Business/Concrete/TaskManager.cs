@@ -76,5 +76,10 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _workRepository.GetTaskByIdWithReportsAndUser(id);
         }
+
+        public int GetCompletedTaskCountByUserId(int userId)
+        {
+            return _workRepository.GetCompletedTaskCountByUserId(userId);
+        }
     }
 }

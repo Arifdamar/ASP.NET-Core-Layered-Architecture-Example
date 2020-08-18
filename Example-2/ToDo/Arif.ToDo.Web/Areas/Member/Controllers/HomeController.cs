@@ -16,11 +16,13 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
     {
         private readonly IReportService _reportService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly ITaskService _taskService;
 
-        public HomeController(IReportService reportService, UserManager<AppUser> userManager)
+        public HomeController(IReportService reportService, UserManager<AppUser> userManager, ITaskService taskService)
         {
             _reportService = reportService;
             _userManager = userManager;
+            _taskService = taskService;
         }
 
         public async Task<IActionResult> Index()
@@ -28,7 +30,7 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
             TempData["Active"] = "homePage";
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             ViewBag.ReportCount = _reportService.GetReportCountByUserId(user.Id);
-
+            ViewBag.CompletedTaskCount = _taskService.GetCompletedTaskCountByUserId(user.Id);
 
             return View();
         }
