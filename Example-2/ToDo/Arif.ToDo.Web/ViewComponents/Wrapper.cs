@@ -1,4 +1,5 @@
-﻿using Arif.ToDo.Entities.Concrete;
+﻿using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace Arif.ToDo.Web.ViewComponents
     public class Wrapper : ViewComponent
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly INotificationService _notificationService;
 
-        public Wrapper(UserManager<AppUser> userManager)
+        public Wrapper(UserManager<AppUser> userManager, INotificationService notificationService)
         {
             _userManager = userManager;
+            _notificationService = notificationService;
         }
 
         public IViewComponentResult Invoke()
@@ -26,6 +29,8 @@ namespace Arif.ToDo.Web.ViewComponents
                 Email = user.Email,
                 Picture = user.Picture
             };
+            var notifications = _notificationService.GetUnreadNotificationsById(user.Id).Count;
+            ViewBag.NotificationCount = notifications;
 
             // ReSharper disable once AsyncConverter.AsyncWait
             var roles = _userManager.GetRolesAsync(user).Result;

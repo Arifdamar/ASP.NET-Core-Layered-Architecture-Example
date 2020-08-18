@@ -13,7 +13,14 @@
         <a asp-controller="TaskOrder" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "taskOrder" ? "active" : "")"><i class="far fa-address-card mr-2"></i>Görev Atama İşlemleri</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-pie mr-2"></i>Grafikler</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-bar mr-2"></i>İstatistikler</a>
-        <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-bell mr-2"></i>Bildirimler</a>
+        <a href="#" class="list-group-item list-group-item-action">
+            <i class="fas fa-bell mr-2"></i>
+            @if (ViewBag.NotificationCount > 0)
+            {
+                <sub class="badge badge-pill badge-info position-absolute" style="bottom: 1.625rem !important; left: 1.65rem !important;">@ViewBag.NotificationCount</sub>
+            }
+            Bildirimler
+        </a>
         <a asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "profile" ? "active" : "")"><i class="far fa-user-circle mr-2"></i>Profil</a>
         <a asp-area="" asp-controller="Home" asp-action="SignOut" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt mr-2"></i>Çıkış Yap</a>
     </div>

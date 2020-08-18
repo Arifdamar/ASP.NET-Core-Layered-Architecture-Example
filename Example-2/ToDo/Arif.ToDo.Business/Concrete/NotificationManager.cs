@@ -40,5 +40,10 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _notificationRepository.GetAll();
         }
+
+        public List<Notification> GetUnreadNotificationsById(int id)
+        {
+            return _notificationRepository.GetUnreadNotificationsById(id);
+        }
     }
 }
