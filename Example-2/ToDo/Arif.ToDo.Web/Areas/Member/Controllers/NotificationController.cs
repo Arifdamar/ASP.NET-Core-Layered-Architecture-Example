@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.Entities.Concrete;
@@ -9,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Arif.ToDo.Web.Areas.Admin.Controllers
+namespace Arif.ToDo.Web.Areas.Member.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = "Member")]
+    [Area("Member")]
     public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;

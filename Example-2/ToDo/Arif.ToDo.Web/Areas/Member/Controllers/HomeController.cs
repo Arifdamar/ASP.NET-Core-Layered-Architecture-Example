@@ -13,6 +13,8 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
     {
         public IActionResult Index()
         {
+            TempData["Active"] = "homePage";
+
             return View();
         }
     }

@@ -5,15 +5,16 @@
 
 <div class="border-right" id="sidebar-wrapper">
     <div class="sidebar-heading text-center">
-        <img src="~/img/@Model.Picture" alt="@Model.Name" class="img-thumbnail" style="height: 12rem !important;" />
+        <img src="~/img/@Model.Picture" alt="@Model.Name" class="img-thumbnail" style="height: 12rem !important; max-width: 12rem !important; max-height: 12rem !important;" />
     </div>
     <div class="list-group list-group-flush">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "homePage" ? "active" : "")"><i class="fas fa-home mr-2"></i>Ana Sayfa</a>
         <a asp-area="Admin" asp-controller="Task" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "task" ? "active" : "")"><i class="fas fa-tasks mr-2"></i>Görev İşlemleri</a>
         <a asp-area="Admin" asp-controller="Urgency" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "urgency" ? "active" : "")"><i class="fas fa-exclamation-triangle mr-2"></i>Aciliyet İşlemleri</a>
         <a asp-area="Admin" asp-controller="TaskOrder" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "taskOrder" ? "active" : "")"><i class="far fa-address-card mr-2"></i>Görev Atama İşlemleri</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-pie mr-2"></i>Grafikler</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-bar mr-2"></i>İstatistikler</a>
-        <a asp-area="Admin" asp-controller="Notification" asp-action="Index" class="list-group-item list-group-item-action">
+        <a asp-area="Admin" asp-controller="Notification" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "notification" ? "active" : "")">
             <i class="fas fa-bell mr-2"></i>
             @if (ViewBag.NotificationCount > 0)
             {

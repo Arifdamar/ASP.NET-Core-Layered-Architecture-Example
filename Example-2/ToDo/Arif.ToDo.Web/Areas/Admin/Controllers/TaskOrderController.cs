@@ -18,13 +18,15 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
         private readonly ITaskService _taskService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IFileService _fileService;
+        private readonly INotificationService _notificationService;
 
-        public TaskOrderController(IAppUserService appUserService, ITaskService taskService, UserManager<AppUser> userManager, IFileService fileService)
+        public TaskOrderController(IAppUserService appUserService, ITaskService taskService, UserManager<AppUser> userManager, IFileService fileService, INotificationService notificationService)
         {
             _appUserService = appUserService;
             _taskService = taskService;
             _userManager = userManager;
             _fileService = fileService;
+            _notificationService = notificationService;
         }
 
         public IActionResult Index()
@@ -94,6 +96,11 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             var taskToUpdate = _taskService.GetById(model.TaskId);
             taskToUpdate.AppUserId = model.PersonnelId;
             _taskService.Update(taskToUpdate);
+            _notificationService.Save(new Notification()
+            {
+                AppUserId = model.PersonnelId,
+                Description = $"{taskToUpdate.Name} Görevine Atandınız."
+            });
 
             return RedirectToAction("Index");
         }

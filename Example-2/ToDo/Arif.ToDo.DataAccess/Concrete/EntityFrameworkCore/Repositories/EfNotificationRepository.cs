@@ -17,6 +17,7 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
             return context.Notifications
                 .Where(I => I.AppUserId == id)
                 .Where(I => !I.Status)
+                .OrderByDescending(I => I.Id)
                 .ToList();
         }
     }
