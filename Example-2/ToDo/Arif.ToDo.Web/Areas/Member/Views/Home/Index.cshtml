@@ -4,5 +4,10 @@
     Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
 }
 
-<h1>Index</h1>
 
+<div class="card bg-light my-3" style="max-width: 20rem;">
+    <div class="card-header text-center font-weight-bold">Yazdığınız Toplam Rapor Sayısı</div>
+    <div class="card-body">
+        <h4 class="card-title text-center">@ViewBag.ReportCount</h4>
+    </div>
+</div>
