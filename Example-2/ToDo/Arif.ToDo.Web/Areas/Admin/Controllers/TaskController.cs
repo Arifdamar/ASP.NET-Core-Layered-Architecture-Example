@@ -94,13 +94,11 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _taskService.Update(new Task()
-                {
-                    Id = model.Id,
-                    Name = model.Name,
-                    Description = model.Description,
-                    UrgencyId = model.UrgencyId
-                });
+                var taskToUpdate = _taskService.GetById(model.Id);
+                taskToUpdate.Name = model.Name;
+                taskToUpdate.Description = model.Description;
+                taskToUpdate.UrgencyId = model.UrgencyId;
+                _taskService.Update(taskToUpdate);
 
                 return RedirectToAction("Index");
             }

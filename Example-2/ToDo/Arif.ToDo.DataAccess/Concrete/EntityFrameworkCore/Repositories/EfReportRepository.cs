@@ -28,5 +28,12 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Include(I => I.Task)
                 .Count(I => I.Task.AppUserId == userId);
         }
+
+        public int GetTotalReportCount()
+        {
+            using var context = new TodoContext();
+
+            return context.Reports.Count();
+        }
     }
 }

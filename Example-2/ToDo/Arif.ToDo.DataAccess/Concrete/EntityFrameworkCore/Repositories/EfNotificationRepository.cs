@@ -20,5 +20,14 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .OrderByDescending(I => I.Id)
                 .ToList();
         }
+
+        public int GetUnreadNotificationCountByUserId(int userId)
+        {
+            using var context = new TodoContext();
+
+            return context.Notifications
+                .Where(I => !I.Status)
+                .Count(I => I.AppUserId == userId);
+        }
     }
 }

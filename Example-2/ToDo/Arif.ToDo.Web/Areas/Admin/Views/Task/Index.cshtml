@@ -27,7 +27,7 @@
                     <td class="text-center align-middle">
                         @item.Name
                     </td>
-                    <td class="text-center align-middle">
+                    <td class="text-center align-middle" style="max-width: 50rem !important;">
                         @item.Description
                     </td>
                     <td class="text-center align-middle">
@@ -87,7 +87,7 @@ else
                     let id = triggerElement.data("id");
 
                     $("#btnDelete").click(function () {
-                        
+
                         $.ajax({
                             type: "Get",
                             url: "./Task/DeleteTask",

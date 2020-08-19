@@ -9,5 +9,6 @@ namespace Arif.ToDo.Business.Interfaces
     {
         Report GetReportByIdWithTask(int id);
         int GetReportCountByUserId(int userId);
+        int GetTotalReportCount();
     }
 }

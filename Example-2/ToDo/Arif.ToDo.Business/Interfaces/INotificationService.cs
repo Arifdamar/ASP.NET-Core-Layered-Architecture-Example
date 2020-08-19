@@ -8,5 +8,6 @@ namespace Arif.ToDo.Business.Interfaces
     public interface INotificationService : IGenericService<Notification>
     {
         List<Notification> GetUnreadNotificationsById(int id);
+        int GetUnreadNotificationCountByUserId(int userId);
     }
 }

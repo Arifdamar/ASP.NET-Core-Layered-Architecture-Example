@@ -101,5 +101,30 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 .Where(I => I.AppUserId == userId)
                 .Count(I => I.Status);
         }
+
+        public int GetUndoneTaskCountByUserId(int userId)
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Where(I => I.AppUserId == userId)
+                .Count(I => !I.Status);
+        }
+
+        public int GetUnassignedTaskCount()
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Count(I => I.AppUserId == null);
+        }
+
+        public int GetCompletedTaskCount()
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Count(I => I.Status);
+        }
     }
 }

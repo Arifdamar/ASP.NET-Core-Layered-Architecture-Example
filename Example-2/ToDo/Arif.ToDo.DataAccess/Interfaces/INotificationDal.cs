@@ -8,5 +8,6 @@ namespace Arif.ToDo.DataAccess.Interfaces
     public interface INotificationDal : IGenericDal<Notification>
     {
         List<Notification> GetUnreadNotificationsById(int id);
+        int GetUnreadNotificationCountByUserId(int userId);
     }
 }

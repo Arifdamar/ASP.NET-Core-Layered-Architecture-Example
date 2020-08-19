@@ -87,7 +87,7 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
                 {
                     _notificationService.Save(new Notification()
                     {
-                        Description = $"{user.Name} {user.SurName} yeni bir rapor yazdı.",
+                        Description = $"{user.Name} {user.SurName}, {_taskService.GetById(model.TaskId).Name} görevine yeni bir rapor yazdı.",
                         AppUserId = admin.Id
                     });
                 }

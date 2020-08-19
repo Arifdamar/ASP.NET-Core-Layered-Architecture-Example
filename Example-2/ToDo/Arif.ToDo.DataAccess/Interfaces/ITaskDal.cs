@@ -15,5 +15,8 @@ namespace Arif.ToDo.DataAccess.Interfaces
         List<Task> GetByUserId(int userId);
         Task GetTaskByIdWithReportsAndUser(int id);
         int GetCompletedTaskCountByUserId(int userId);
+        int GetUndoneTaskCountByUserId(int userId);
+        int GetUnassignedTaskCount();
+        int GetCompletedTaskCount();
     }
 }

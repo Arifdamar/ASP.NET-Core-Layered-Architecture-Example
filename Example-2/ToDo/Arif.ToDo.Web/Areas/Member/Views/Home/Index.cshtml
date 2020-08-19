@@ -9,32 +9,67 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card bg-light my-3 mx-auto d-block text-center">
-                <div class="card-header font-weight-bold">Toplam Yazdığınız Rapor Sayısı</div>
+                <div class="card-header bg-info text-center font-weight-bold">Toplam Aktif Görev Sayısı</div>
                 <div class="card-body">
-                    @if (ViewBag.ReportCount > 0)
+                    @if (ViewBag.UndoneTaskCount > 0)
                     {
-                        <h4 class="card-title">@ViewBag.ReportCount</h4>
-                        <a href="" class="btn btn-info btn-block">Tüm Raporlar</a>
+                        <h4 class="card-title">@ViewBag.UndoneTaskCount</h4>
+                        <a asp-area="Member" asp-controller="TaskOrder" asp-action="Index" class="btn btn-info btn-block">Görüntüle</a>
                     }
                     else
                     {
-                        <h4 class="card-title">Henüz Hiç Rapor Yazmadınız</h4>
+                        <h4 class="card-title">Hiç Aktif Göreviniz Bulunmamakta</h4>
                     }
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card bg-light my-3 mx-auto d-block text-center">
-                <div class="card-header text-center font-weight-bold">Toplam Tamamladığınız Görev Sayısı</div>
+                <div class="card-header bg-info text-center font-weight-bold">Toplam Tamamladığınız Görev Sayısı</div>
                 <div class="card-body">
                     @if (ViewBag.ReportCount > 0)
                     {
                         <h4 class="card-title">@ViewBag.CompletedTaskCount</h4>
-                        <a asp-area="Member" asp-controller="Task" asp-action="Index" class="btn btn-info btn-block">Tüm Görevler</a>
+                        <a asp-area="Member" asp-controller="Task" asp-action="Index" class="btn btn-info btn-block">Görüntüle</a>
                     }
                     else
                     {
                         <h4 class="card-title">Henüz Hiç Görev Tamamlamadınız</h4>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-light my-3 mx-auto d-block text-center">
+                <div class="card-header bg-info font-weight-bold">Toplam Okunmamış Bildirim Sayısı</div>
+                <div class="card-body">
+                    @if (ViewBag.UnreadNotificationCount > 0)
+                    {
+                        <h4 class="card-title">@ViewBag.UnreadNotificationCount</h4>
+                        <a asp-area="Member" asp-controller="Notification" asp-action="Index" class="btn btn-info btn-block">Görüntüle</a>
+                    }
+                    else
+                    {
+                        <h4 class="card-title">Okunmamış Bildiriminiz Yoktur</h4>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-light my-3 mx-auto d-block text-center">
+                <div class="card-header bg-info font-weight-bold">Toplam Yazdığınız Rapor Sayısı</div>
+                <div class="card-body">
+                    @if (ViewBag.ReportCount > 0)
+                    {
+                        <h4 class="card-title">@ViewBag.ReportCount</h4>
+                        <a href="" class="btn btn-info btn-block">Görüntüle</a>
+                    }
+                    else
+                    {
+                        <h4 class="card-title">Henüz Hiç Rapor Yazmadınız</h4>
                     }
                 </div>
             </div>

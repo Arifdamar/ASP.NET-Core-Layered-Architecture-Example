@@ -9,5 +9,6 @@ namespace Arif.ToDo.DataAccess.Interfaces
     {
         Report GetReportByIdWithTask(int id);
         int GetReportCountByUserId(int userId);
+        int GetTotalReportCount();
     }
 }
