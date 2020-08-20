@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Arif.ToDo.DTO.DTOs.ReportDTOs
 {
-    public class UpdateReportDto
+    public class ReportUpdateDto
     {
         public int Id { get; set; }
         public string Definition { get; set; }
