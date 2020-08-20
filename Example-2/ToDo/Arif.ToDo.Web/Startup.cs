@@ -4,10 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Arif.ToDo.Business.Concrete;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.Business.ValidationRules.FluentValidation;
 using Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Contexts;
 using Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using Arif.ToDo.DataAccess.Interfaces;
+using Arif.ToDo.DTO.DTOs.AppUserDTOs;
+using Arif.ToDo.DTO.DTOs.ReportDTOs;
+using Arif.ToDo.DTO.DTOs.TaskDTOs;
+using Arif.ToDo.DTO.DTOs.UrgencyDTOs;
 using Arif.ToDo.Entities.Concrete;
+using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -57,7 +65,20 @@ namespace Arif.ToDo.Web
                 opt.LoginPath = "/Home/Index";
             });
 
-            services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddTransient<IValidator<AppUserAddDto>, AppUserAddValidator>();
+            services.AddTransient<IValidator<AppUserSignInDto>, AppUserSignInValidator>();
+            services.AddTransient<IValidator<ReportAddDto>, ReportAddValidator>();
+            services.AddTransient<IValidator<ReportUpdateDto>, ReportUpdateValidator>();
+            services.AddTransient<IValidator<TaskAddDto>, TaskAddValidator>();
+            services.AddTransient<IValidator<TaskUpdateDto>, TaskUpdateValidator>();
+            services.AddTransient<IValidator<UrgencyAddDto>, UrgencyAddValidator>();
+            services.AddTransient<IValidator<UrgencyUpdateDto>, UrgencyUpdateValidator>();
+
+            services
+                .AddControllersWithViews()
+                .AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
