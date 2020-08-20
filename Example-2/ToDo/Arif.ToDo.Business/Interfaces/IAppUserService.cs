@@ -9,5 +9,7 @@ namespace Arif.ToDo.Business.Interfaces
     {
         List<AppUser> GetNonAdminUsers();
         List<AppUser> GetNonAdminUsers(out int totalPage, string keyword, int activePage);
+        List<DualHelper> GetTopTaskCompleterUsers();
+        List<DualHelper> GetTopActiveTaskUsers();
     }
 }

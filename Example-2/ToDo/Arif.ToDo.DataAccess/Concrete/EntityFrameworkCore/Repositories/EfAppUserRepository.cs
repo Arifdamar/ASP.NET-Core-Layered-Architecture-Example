@@ -5,6 +5,7 @@ using System.Text;
 using Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Contexts;
 using Arif.ToDo.DataAccess.Interfaces;
 using Arif.ToDo.Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
@@ -78,6 +79,42 @@ namespace Arif.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
             result = result.Skip((activePage - 1) * 3).Take(3);
 
             return result.ToList();
+        }
+
+        public List<DualHelper> GetTopTaskCompleterUsers()
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Include(I => I.AppUser)
+                .Where(I => I.Status)
+                .GroupBy(I => I.AppUser.UserName)
+                .OrderByDescending(I => I.Count())
+                .Take(5)
+                .Select(I => new DualHelper
+                {
+                    Name = I.Key,
+                    TaskCount = I.Count()
+                })
+                .ToList();
+        }
+
+        public List<DualHelper> GetTopActiveTaskUsers()
+        {
+            using var context = new TodoContext();
+
+            return context.Tasks
+                .Include(I => I.AppUser)
+                .Where(I => !I.Status && I.AppUserId != null)
+                .GroupBy(I => I.AppUser.UserName)
+                .OrderByDescending(I => I.Count())
+                .Take(5)
+                .Select(I => new DualHelper
+                {
+                    Name = I.Key,
+                    TaskCount = I.Count()
+                })
+                .ToList();
         }
     }
 }

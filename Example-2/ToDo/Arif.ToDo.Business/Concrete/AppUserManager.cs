@@ -25,5 +25,15 @@ namespace Arif.ToDo.Business.Concrete
         {
             return _appUserDal.GetNonAdminUsers(out totalPage, keyword, activePage);
         }
+
+        public List<DualHelper> GetTopTaskCompleterUsers()
+        {
+            return _appUserDal.GetTopTaskCompleterUsers();
+        }
+
+        public List<DualHelper> GetTopActiveTaskUsers()
+        {
+            return _appUserDal.GetTopActiveTaskUsers();
+        }
     }
 }
