@@ -40,11 +40,12 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUrgency(AddUrgencyViewModel model)
+        public IActionResult AddUrgency(UrgencyAddDto model)
         {
             if (ModelState.IsValid)
             {
-                _urgencyService.Save(new Urgency(){Description = model.Description});
+                _urgencyService.Save(_mapper.Map<Urgency>(model));
+
                 return RedirectToAction("Index");
             }
 

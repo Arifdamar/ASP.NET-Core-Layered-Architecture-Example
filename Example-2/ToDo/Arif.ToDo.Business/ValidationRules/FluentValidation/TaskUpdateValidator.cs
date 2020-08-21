@@ -11,7 +11,7 @@ namespace Arif.ToDo.Business.ValidationRules.FluentValidation
         public TaskUpdateValidator()
         {
             RuleFor(I => I.Name).NotNull().WithMessage("Görevin Adı Boş Geçilemez");
-            RuleFor(I => I.UrgencyId).ExclusiveBetween(1, int.MaxValue).WithMessage("Lütfen Geçerli Bir Aciliyet Durumu Seçiniz");
+            RuleFor(I => I.UrgencyId).ExclusiveBetween(0, int.MaxValue).WithMessage("Lütfen Geçerli Bir Aciliyet Durumu Seçiniz");
         }
     }
 }

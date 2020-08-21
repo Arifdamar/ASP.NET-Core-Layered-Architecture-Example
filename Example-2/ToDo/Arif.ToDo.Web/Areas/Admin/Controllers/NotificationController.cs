@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.DTO.DTOs.NotificationDTOs;
 using Arif.ToDo.Entities.Concrete;
-using Arif.ToDo.Web.Areas.Admin.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
