@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.DTO.DTOs.NotificationDTOs;
 using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,30 +19,21 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
     {
         private readonly INotificationService _notificationService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public NotificationController(INotificationService notificationService, UserManager<AppUser> userManager)
+        public NotificationController(INotificationService notificationService, UserManager<AppUser> userManager, IMapper mapper)
         {
             _notificationService = notificationService;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = "notification";
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var notifications = _notificationService.GetUnreadNotificationsById(user.Id);
-            List<NotificationListViewModel> model = new List<NotificationListViewModel>();
-
-            notifications.ForEach(notification =>
-            {
-                model.Add(new NotificationListViewModel()
-                {
-                    Id = notification.Id,
-                    Description = notification.Description
-                });
-            });
-
-            return View(model);
+            
+            return View(_mapper.Map<List<NotificationListDto>>(_notificationService.GetUnreadNotificationsById(user.Id)));
         }
 
         [HttpPost]
