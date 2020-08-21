@@ -1,4 +1,4 @@
-﻿@model List<UrgencyListViewModel>
+﻿@model List<UrgencyListDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -21,7 +21,7 @@
             {
                 <tr>
                     <td class="text-center align-middle">
-                        @item.Definition
+                        @item.Description
                     </td>
                     <td class="text-center align-middle">
                         <a asp-action="UpdateUrgency" asp-controller="Urgency" asp-route-id="@item.Id" class="btn btn-warning"><i class="far fa-edit"></i></a>
