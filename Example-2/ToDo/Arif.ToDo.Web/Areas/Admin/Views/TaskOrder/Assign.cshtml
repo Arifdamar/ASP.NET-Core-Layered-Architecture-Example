@@ -1,4 +1,4 @@
-﻿@model TaskListViewModel
+﻿@model TaskListDto
 @{
     ViewData["Title"] = "Assign";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -24,7 +24,7 @@
 
                 <p class="card-text">
                     <small>
-                        @Model.CratedDate.ToString("D")
+                        @Model.CreatedDate.ToString("D")
                     </small>
                 </p>
             </div>
@@ -54,7 +54,7 @@
         </div>
 
 
-        @foreach (var worker in (List<AppUserListViewModel>)ViewBag.Personnel)
+        @foreach (var worker in (List<AppUserListDto>)ViewBag.Personnel)
         {
             <div class="card mb-3">
                 <div class="row no-gutters">

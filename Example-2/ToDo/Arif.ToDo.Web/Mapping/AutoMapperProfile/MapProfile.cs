@@ -50,6 +50,8 @@ namespace Arif.ToDo.Web.Mapping.AutoMapperProfile
             CreateMap<Task, TaskAddDto>();
             CreateMap<TaskListDto, Task>();
             CreateMap<Task, TaskListDto>();
+            CreateMap<TaskListAllDto, Task>();
+            CreateMap<Task, TaskListAllDto>();
             CreateMap<TaskUpdateDto, Task>();
             CreateMap<Task, TaskUpdateDto>();
 

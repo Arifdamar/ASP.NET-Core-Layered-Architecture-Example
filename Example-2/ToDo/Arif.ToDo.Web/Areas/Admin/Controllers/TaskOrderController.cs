@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.DTO.DTOs.AppUserDTOs;
+using Arif.ToDo.DTO.DTOs.TaskDTOs;
 using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,83 +22,43 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IFileService _fileService;
         private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public TaskOrderController(IAppUserService appUserService, ITaskService taskService, UserManager<AppUser> userManager, IFileService fileService, INotificationService notificationService)
+        public TaskOrderController(IAppUserService appUserService, ITaskService taskService, UserManager<AppUser> userManager, IFileService fileService, INotificationService notificationService, IMapper mapper)
         {
             _appUserService = appUserService;
             _taskService = taskService;
             _userManager = userManager;
             _fileService = fileService;
             _notificationService = notificationService;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
             TempData["Active"] = "taskOrder";
-            //var model = _appUserService.GetNonAdminUsers();
 
-            var tasks = _taskService.GetAllTasksWithAllFields();
-            List<AllTasksListViewModel> model = new List<AllTasksListViewModel>();
-
-            tasks.ForEach(task =>
-            {
-                model.Add(new AllTasksListViewModel()
-                {
-                    Id = task.Id,
-                    AppUser = task.AppUser,
-                    CratedDate = task.CreatedDate,
-                    Description = task.Description,
-                    Name = task.Name,
-                    Report = task.Report,
-                    Urgency = task.Urgency
-                });
-            });
-
-            return View(model);
+            return View(_mapper.Map<List<TaskListAllDto>>(_taskService.GetAllTasksWithAllFields()));
         }
 
         public IActionResult Assign(int id, string keyword, int activePage = 1)
         {
             TempData["Active"] = "taskOrder";
-            var task = _taskService.GetTaskByIdWithUrgency(id);
-            var personnel = _appUserService.GetNonAdminUsers(out var totalPage, keyword, activePage);
+            ViewBag.Personnel = _mapper.Map<List<AppUserListDto>>(_appUserService.GetNonAdminUsers(out var totalPage, keyword, activePage));
             ViewBag.ActivePage = activePage;
             ViewBag.TotalPages = totalPage;
             ViewBag.Keyword = keyword;
-            List<AppUserListViewModel> appUserListModels = new List<AppUserListViewModel>();
 
-            personnel.ForEach(user =>
-            {
-                appUserListModels.Add(new AppUserListViewModel()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    Name = user.Name,
-                    SurName = user.SurName,
-                    Picture = user.Picture
-                });
-            });
-
-            ViewBag.Personnel = appUserListModels;
-
-            TaskListViewModel taskModel = new TaskListViewModel()
-            {
-                Id = task.Id,
-                Name = task.Name,
-                Description = task.Description,
-                CratedDate = task.CreatedDate,
-                Urgency = task.Urgency
-            };
-
-            return View(taskModel);
+            return View(_mapper.Map<TaskListDto>(_taskService.GetTaskByIdWithUrgency(id)));
         }
 
         [HttpPost]
-        public IActionResult Assign(PersonnelAssignViewModel model)
+        public IActionResult Assign(PersonnelAssignDto model)
         {
             var taskToUpdate = _taskService.GetById(model.TaskId);
             taskToUpdate.AppUserId = model.PersonnelId;
             _taskService.Update(taskToUpdate);
+
             _notificationService.Save(new Notification()
             {
                 AppUserId = model.PersonnelId,
@@ -105,48 +68,22 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult PersonnelAssign(PersonnelAssignViewModel model)
+        public IActionResult PersonnelAssign(PersonnelAssignDto model)
         {
             TempData["Active"] = "taskOrder";
-            var user = _userManager.Users.FirstOrDefault(I => I.Id == model.PersonnelId);
-            var task = _taskService.GetTaskByIdWithUrgency(model.TaskId);
 
-            PersonnelAssignListViewModel viewModel = new PersonnelAssignListViewModel()
+            return View(new PersonnelAssignListDto()
             {
-                AppUser = new AppUserListViewModel()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    Name = user.Name,
-                    SurName = user.SurName,
-                    Picture = user.Picture
-                },
-                Task = new TaskListViewModel()
-                {
-                    Id = task.Id,
-                    Name = task.Name,
-                    Description = task.Description,
-                    Urgency = task.Urgency
-                }
-            };
-
-            return View(viewModel);
+                AppUser = _mapper.Map<AppUserListDto>(_userManager.Users.FirstOrDefault(I => I.Id == model.PersonnelId)),
+                Task = _mapper.Map<TaskListDto>(_taskService.GetTaskByIdWithUrgency(model.TaskId))
+            });
         }
 
         public IActionResult ShowDetails(int id)
         {
             TempData["Active"] = "taskOrder";
-            var task = _taskService.GetTaskByIdWithReportsAndUser(id);
-            AllTasksListViewModel model = new AllTasksListViewModel()
-            {
-                Id = task.Id,
-                Name = task.Name,
-                Description = task.Description,
-                Report = task.Report,
-                AppUser = task.AppUser
-            };
 
-            return View(model);
+            return View(_mapper.Map<TaskListAllDto>(_taskService.GetTaskByIdWithReportsAndUser(id)));
         }
 
         public IActionResult ExportExcel(int id)

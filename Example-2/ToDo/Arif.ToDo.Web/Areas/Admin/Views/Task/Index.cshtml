@@ -24,14 +24,14 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="text-center align-middle">
+                    <td class="text-center align-middle" style="max-width: 10rem !important;">
                         @item.Name
                     </td>
-                    <td class="text-center align-middle" style="max-width: 50rem !important;">
+                    <td class="text-center align-middle" style="max-width: 40rem !important;">
                         @item.Description
                     </td>
                     <td class="text-center align-middle">
-                        @item.CratedDate.ToString(CultureInfo.CurrentCulture)
+                        @item.CreatedDate.ToString(CultureInfo.CurrentCulture)
                     </td>
                     <td class="text-center align-middle">
                         @item.Urgency.Description

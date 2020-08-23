@@ -1,4 +1,4 @@
-﻿@model List<AllTasksListViewModel>
+﻿@model List<TaskListAllDto>
 
 @{
     ViewData["Title"] = "Index";
@@ -34,11 +34,11 @@
             @foreach (var task in Model)
             {
             <tr>
-                <td class="text-center align-middle">
+                <td class="text-center align-middle" style="max-width: 10px !important;">
                     @task.Name
                 </td>
                 <td class="text-center align-middle">
-                    @task.CratedDate
+                    @task.CreatedDate
                 </td>
                 <td class="text-center align-middle">
                     @{
