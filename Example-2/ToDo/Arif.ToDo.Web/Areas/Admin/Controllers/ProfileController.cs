@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Arif.ToDo.DTO.DTOs.AppUserDTOs;
 using Arif.ToDo.Entities.Concrete;
 using Arif.ToDo.Web.Areas.Admin.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -18,30 +20,23 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
     public class ProfileController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public ProfileController(UserManager<AppUser> userManager)
+        public ProfileController(UserManager<AppUser> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = "profile";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            AppUserListViewModel model = new AppUserListViewModel()
-            {
-                Id = user.Id,
-                Name = user.Name,
-                SurName = user.SurName,
-                Email = user.Email,
-                Picture = user.Picture
-            };
 
-            return View(model);
+            return View(_mapper.Map<AppUserListDto>(await _userManager.FindByNameAsync(User.Identity.Name)));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(AppUserListViewModel model, IFormFile photo)
+        public async Task<IActionResult> Index(AppUserListDto model, IFormFile photo)
         {
             if (ModelState.IsValid)
             {
