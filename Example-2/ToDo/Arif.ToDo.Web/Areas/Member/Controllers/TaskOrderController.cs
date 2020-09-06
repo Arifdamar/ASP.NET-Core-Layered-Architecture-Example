@@ -1,66 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.DTO.DTOs.ReportDTOs;
+using Arif.ToDo.DTO.DTOs.TaskDTOs;
 using Arif.ToDo.Entities.Concrete;
-using Arif.ToDo.Web.Areas.Admin.Models;
-using Arif.ToDo.Web.Areas.Member.Models;
+using Arif.ToDo.Web.BaseControllers;
+using Arif.ToDo.Web.Consts;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Areas.Member.Controllers
 {
-    [Authorize(Roles = "Member")]
-    [Area("Member")]
-    public class TaskOrderController : Controller
+    [Authorize(Roles = Roles.Member)]
+    [Area(AreaNames.Member)]
+    public class TaskOrderController : BaseIdentityController
     {
         private readonly ITaskService _taskService;
         private readonly IReportService _reportService;
-        private readonly UserManager<AppUser> _userManager;
         private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public TaskOrderController(ITaskService taskService, IReportService reportService, UserManager<AppUser> userManager, INotificationService notificationService)
+        public TaskOrderController(ITaskService taskService, IReportService reportService, UserManager<AppUser> userManager, INotificationService notificationService, IMapper mapper) : base(userManager)
         {
             _taskService = taskService;
             _reportService = reportService;
-            _userManager = userManager;
             _notificationService = notificationService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            TempData["Active"] = "taskOrder";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var tasks = _taskService.GetAllTasksWithAllFields(I => I.AppUserId == user.Id && !I.Status);
+            TempData["Active"] = ActivePage.TaskOrder;
+            var user = await GetCurrentUser();
 
-            List<AllTasksListViewModel> model = new List<AllTasksListViewModel>();
-
-            tasks.ForEach(task =>
-            {
-                model.Add(new AllTasksListViewModel()
-                {
-                    Id = task.Id,
-                    AppUser = task.AppUser,
-                    CratedDate = task.CreatedDate,
-                    Description = task.Description,
-                    Name = task.Name,
-                    Report = task.Report,
-                    Urgency = task.Urgency
-                });
-            });
-
-            return View(model);
+            return View(_mapper.Map<List<TaskListAllDto>>(_taskService.GetAllTasksWithAllFields(I => I.AppUserId == user.Id && !I.Status)));
         }
 
         #region AddReport
         public IActionResult AddReport(int id)
         {
-            TempData["Active"] = "taskOrder";
+            TempData["Active"] = ActivePage.TaskOrder;
             var task = _taskService.GetTaskByIdWithUrgency(id);
 
-            ReportAddViewModel model = new ReportAddViewModel()
+            ReportAddDto model = new ReportAddDto()
             {
                 Task = task,
                 TaskId = id
@@ -70,7 +54,7 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddReport(ReportAddViewModel model)
+        public async Task<IActionResult> AddReport(ReportAddDto model)
         {
             if (ModelState.IsValid)
             {
@@ -80,8 +64,8 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
                     Definition = model.Definition,
                     Description = model.Description
                 });
-                var adminUserList = await _userManager.GetUsersInRoleAsync("Admin").ConfigureAwait(true);
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                var adminUserList = await UserManager.GetUsersInRoleAsync(Roles.Admin);
+                var user = await GetCurrentUser();
 
                 foreach (var admin in adminUserList)
                 {
@@ -102,23 +86,22 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
         #region UpdateReport
         public IActionResult UpdateReport(int id)
         {
-            TempData["Active"] = "taskOrder";
+            TempData["Active"] = ActivePage.TaskOrder;
             var report = _reportService.GetReportByIdWithTask(id);
-            var task = _taskService.GetTaskByIdWithUrgency(report.TaskId);
 
-            ReportUpdateViewModel model = new ReportUpdateViewModel()
+            ReportUpdateDto model = new ReportUpdateDto()
             {
                 Id = id,
                 Definition = report.Definition,
                 Description = report.Description,
-                Task = task
+                Task = report.Task
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult UpdateReport(ReportUpdateViewModel model)
+        public IActionResult UpdateReport(ReportUpdateDto model)
         {
             if (ModelState.IsValid)
             {
@@ -139,8 +122,8 @@ namespace Arif.ToDo.Web.Areas.Member.Controllers
             var taskToUpdate = _taskService.GetById(id);
             taskToUpdate.Status = true;
             _taskService.Update(taskToUpdate);
-            var adminUserList = await _userManager.GetUsersInRoleAsync("Admin").ConfigureAwait(true);
-            var user = await _userManager.FindByNameAsync(User.Identity.Name).ConfigureAwait(true);
+            var adminUserList = await UserManager.GetUsersInRoleAsync(Roles.Admin);
+            var user = await GetCurrentUser();
 
             foreach (var admin in adminUserList)
             {

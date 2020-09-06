@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Arif.ToDo.Entities.Concrete;
+﻿using Arif.ToDo.Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Task = System.Threading.Tasks.Task;
 

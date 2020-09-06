@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.DTO.DTOs.UrgencyDTOs;
 using Arif.ToDo.Entities.Concrete;
-using Arif.ToDo.Web.Areas.Admin.Models;
+using Arif.ToDo.Web.Consts;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = Roles.Admin)]
+    [Area(AreaNames.Admin)]
     public class UrgencyController : Controller
     {
         private readonly IUrgencyService _urgencyService;
@@ -27,14 +24,14 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            TempData["Active"] = "urgency";
+            TempData["Active"] = ActivePage.Urgency;
 
             return View(_mapper.Map<List<UrgencyListDto>>(_urgencyService.GetAll()));
         }
 
         public IActionResult AddUrgency()
         {
-            TempData["Active"] = "urgency";
+            TempData["Active"] = ActivePage.Urgency;
 
             return View(new UrgencyAddDto());
         }
@@ -54,7 +51,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult UpdateUrgency(int id)
         {
-            TempData["Active"] = "urgency";
+            TempData["Active"] = ActivePage.Urgency;
 
             return View(_mapper.Map<UrgencyUpdateDto>(_urgencyService.GetById(id)));
         }

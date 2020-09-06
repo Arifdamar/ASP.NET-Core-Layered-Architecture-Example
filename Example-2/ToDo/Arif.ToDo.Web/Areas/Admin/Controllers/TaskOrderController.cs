@@ -5,7 +5,7 @@ using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.DTO.DTOs.AppUserDTOs;
 using Arif.ToDo.DTO.DTOs.TaskDTOs;
 using Arif.ToDo.Entities.Concrete;
-using Arif.ToDo.Web.Areas.Admin.Models;
+using Arif.ToDo.Web.Consts;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,8 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Arif.ToDo.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = Roles.Admin)]
+    [Area(AreaNames.Admin)]
     public class TaskOrderController : Controller
     {
         private readonly IAppUserService _appUserService;
@@ -36,14 +36,14 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            TempData["Active"] = "taskOrder";
+            TempData["Active"] = ActivePage.TaskOrder;
 
             return View(_mapper.Map<List<TaskListAllDto>>(_taskService.GetAllTasksWithAllFields()));
         }
 
         public IActionResult Assign(int id, string keyword, int activePage = 1)
         {
-            TempData["Active"] = "taskOrder";
+            TempData["Active"] = ActivePage.TaskOrder;
             ViewBag.Personnel = _mapper.Map<List<AppUserListDto>>(_appUserService.GetNonAdminUsers(out var totalPage, keyword, activePage));
             ViewBag.ActivePage = activePage;
             ViewBag.TotalPages = totalPage;
@@ -70,7 +70,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult PersonnelAssign(PersonnelAssignDto model)
         {
-            TempData["Active"] = "taskOrder";
+            TempData["Active"] = ActivePage.TaskOrder;
 
             return View(new PersonnelAssignListDto()
             {
@@ -81,7 +81,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult ShowDetails(int id)
         {
-            TempData["Active"] = "taskOrder";
+            TempData["Active"] = ActivePage.TaskOrder;
 
             return View(_mapper.Map<TaskListAllDto>(_taskService.GetTaskByIdWithReportsAndUser(id)));
         }

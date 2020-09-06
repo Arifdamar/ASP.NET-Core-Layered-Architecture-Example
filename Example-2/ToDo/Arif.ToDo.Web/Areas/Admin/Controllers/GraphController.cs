@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Arif.ToDo.Business.Interfaces;
+﻿using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.Web.Consts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Arif.ToDo.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = Roles.Admin)]
+    [Area(AreaNames.Admin)]
     public class GraphController : Controller
     {
         private readonly IAppUserService _appUserService;
@@ -22,7 +19,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            TempData["Active"] = "graph";
+            TempData["Active"] = ActivePage.Graph;
 
             return View();
         }

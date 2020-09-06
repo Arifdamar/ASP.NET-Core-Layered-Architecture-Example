@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Arif.ToDo.DTO.DTOs.AppUserDTOs;
+﻿using Arif.ToDo.DTO.DTOs.AppUserDTOs;
 using Arif.ToDo.DTO.DTOs.NotificationDTOs;
 using Arif.ToDo.DTO.DTOs.ReportDTOs;
 using Arif.ToDo.DTO.DTOs.TaskDTOs;

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.DTO.DTOs.TaskDTOs;
 using Arif.ToDo.Entities.Concrete;
-using Arif.ToDo.Web.Areas.Admin.Models;
+using Arif.ToDo.Web.Consts;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Arif.ToDo.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = Roles.Admin)]
+    [Area(AreaNames.Admin)]
     public class TaskController : Controller
     {
         private readonly ITaskService _taskService;
@@ -29,14 +27,14 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            TempData["Active"] = "task";
+            TempData["Active"] = ActivePage.Task;
 
             return View(_mapper.Map<List<TaskListDto>>(_taskService.GetUndoneTasksWithUrgency()));
         }
 
         public IActionResult AddTask()
         {
-            TempData["Active"] = "task";
+            TempData["Active"] = ActivePage.Task;
             ViewBag.Urgencies = new SelectList(_urgencyService.GetAll(), "Id", "Description");
 
             return View(new TaskAddDto());
@@ -59,7 +57,7 @@ namespace Arif.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult UpdateTask(int id)
         {
-            TempData["Active"] = "task";
+            TempData["Active"] = ActivePage.Task;
             var task = _taskService.GetById(id);
             ViewBag.Urgencies = new SelectList(_urgencyService.GetAll(), "Id", "Description", task.UrgencyId);
 

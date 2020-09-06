@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Arif.ToDo.Business.Interfaces;
 using Arif.ToDo.DataAccess.Interfaces;
 using Arif.ToDo.Entities.Concrete;

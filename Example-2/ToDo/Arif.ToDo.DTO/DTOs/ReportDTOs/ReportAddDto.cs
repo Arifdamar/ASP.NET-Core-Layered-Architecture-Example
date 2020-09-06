@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Arif.ToDo.Entities.Concrete;
 
 namespace Arif.ToDo.DTO.DTOs.ReportDTOs
 {
@@ -8,7 +6,7 @@ namespace Arif.ToDo.DTO.DTOs.ReportDTOs
     {
         public string Definition { get; set; }
         public string Description { get; set; }
-        //public Task Task { get; set; }
+        public Task Task { get; set; }
         public int TaskId { get; set; }
     }
 }

@@ -1,27 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Arif.ToDo.Business.Interfaces;
+using Arif.ToDo.DTO.DTOs.AppUserDTOs;
 using Arif.ToDo.Entities.Concrete;
-using Arif.ToDo.Web.Models;
+using Arif.ToDo.Web.BaseControllers;
+using Arif.ToDo.Web.Consts;
+using AutoMapper;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Task = Arif.ToDo.Entities.Concrete.Task;
 
 namespace Arif.ToDo.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseIdentityController
     {
         private readonly ITaskService _taskService;
-        private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IMapper _mapper;
+        private readonly ICustomLogger _customLogger;
 
-        public HomeController(ITaskService taskService, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public HomeController(ITaskService taskService, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, ICustomLogger customLogger) : base(userManager)
         {
             _taskService = taskService;
-            _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
+            _customLogger = customLogger;
         }
 
         public IActionResult Index()
@@ -30,11 +32,11 @@ namespace Arif.ToDo.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(AppUserSignInModel model)
+        public async Task<IActionResult> SignIn(AppUserSignInDto model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.UserName);
+                var user = await UserManager.FindByNameAsync(model.UserName);
 
                 if (user != null)
                 {
@@ -42,20 +44,20 @@ namespace Arif.ToDo.Web.Controllers
 
                     if (identityResult.Succeeded)
                     {
-                        var userRoles = await _userManager.GetRolesAsync(user);
+                        var userRoles = await UserManager.GetRolesAsync(user);
 
-                        if (userRoles.Contains("Admin"))
+                        if (userRoles.Contains(AreaNames.Admin))
                         {
-                            return RedirectToAction("Index", "Home", new { area = "Admin" });
+                            return RedirectToAction("Index", "Home", new { area = AreaNames.Admin });
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home", new { area = "Member" });
+                            return RedirectToAction("Index", "Home", new { area = AreaNames.Member });
                         }
                     }
                 }
 
-                ModelState.AddModelError("", "Kullanıcı Adı veya Şifre Hatalı");
+                ModelState.AddModelError("", Messages.LoginError);
             }
 
             return View("Index", model);
@@ -63,43 +65,30 @@ namespace Arif.ToDo.Web.Controllers
 
         public IActionResult Register()
         {
-            return View(new AppUserAddViewModel());
+            return View(new AppUserAddDto());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(AppUserAddViewModel model)
+        public async Task<IActionResult> Register(AppUserAddDto model)
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser()
-                {
-                    UserName = model.UserName,
-                    Email = model.Email,
-                    Name = model.Name,
-                    SurName = model.SurName
-                };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var user = _mapper.Map<AppUser>(model);
+                var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    var addRoleResult = await _userManager.AddToRoleAsync(user, "Member");
+                    var addRoleResult = await UserManager.AddToRoleAsync(user, Roles.Member);
 
                     if (addRoleResult.Succeeded)
                     {
                         return RedirectToAction("Index");
                     }
 
-                    foreach (var error in addRoleResult.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    AddErrorRange(addRoleResult.Errors);
                 }
 
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-
+                AddErrorRange(result.Errors);
             }
 
             return View(model);
@@ -110,6 +99,27 @@ namespace Arif.ToDo.Web.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult StatusCode(int? code)
+        {
+            if (code == 404)
+            {
+                ViewBag.Code = code;
+                ViewBag.Message = Messages.PageNotFound;
+            }
+
+            return View();
+        }
+
+        public IActionResult Error()
+        {
+            var exceptionHandler = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            _customLogger.LogError($"Hatanın oluştuğu yer: {exceptionHandler.Path}\nHatanın mesajı :{exceptionHandler.Error.Message}\nStack Trace: {exceptionHandler.Error.StackTrace}");
+            ViewBag.Path = exceptionHandler.Path;
+            ViewBag.Message = exceptionHandler.Error.Message;
+
+            return View();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Arif.ToDo.Web.Areas.Admin.Models.AppUserListViewModel
+﻿@model AppUserListDto
 @{
     string activePage = TempData["Active"]?.ToString();
 }
@@ -21,7 +21,7 @@
             }
             Bildirimler
         </a>
-        <a asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "profile" ? "active" : "")"><i class="far fa-user-circle mr-2"></i>Profil</a>
+        <a asp-area="Admin" asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action @(activePage == "profile" ? "active" : "")"><i class="far fa-user-circle mr-2"></i>Profil</a>
         <a asp-area="" asp-controller="Home" asp-action="SignOut" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt mr-2"></i>Çıkış Yap</a>
     </div>
 </div>
